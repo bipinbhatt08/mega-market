@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -15,13 +14,58 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+.nav-item{
+  color: var(--foreground-rgb)
+}
+.loginBtn{
+   color: rgb(255,90,95);
+   border: 2px solid rgb(255,90,95);
+  background-color: white ;
+} 
+.signUpBtn{
+  background-color:  rgb(255,90,95);
+  color: white;
+}
+.activeNav{
+  color: rgb(255,90,95);
+}
+.login-form{
+  /* border: 1px solid gray; */
+  padding: 40px 50px;
+  border-radius: 10px;
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+}
+
+@media screen and (max-width: 600px) {
+  .login-form {
+    padding: 30px ;
+  }
+  .breadcrumb-container{
+    height: 20vh !important;
+  }
+}
+.breadcrumb-container  {
+  height: 40vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:  url('/breadcrumb.jpg');
+  /* background-image: url('./images/breadcrumb-image.webp'); */
+  background-size: cover;
+  background-position: center center;
+}
+.breadcrumb h1{
+ color: white;
+}
+.breadcrumb-container img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.color-white{
+  color: white !important;
+}
+.color-red{
+  color:  rgb(255,90,95);
 }
