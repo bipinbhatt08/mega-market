@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { BreadcrumbItem,Breadcrumbs } from '@nextui-org/react'
 const page = (props) => {

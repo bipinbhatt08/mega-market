@@ -1,7 +1,8 @@
+'use client'
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle,NavbarMenu,NavbarMenuItem} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuToggle,NavbarMenu,NavbarMenuItem} from "@nextui-org/react";
 import { color } from "framer-motion";
-
+import Link from 'next/link'
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -38,21 +39,7 @@ export default function App() {
             About Us
           </Link>
         </NavbarItem>
-        <NavbarItem >
-          <Link href="#" aria-current="page"  className="nav-item">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem >
-          <Link href="#" aria-current="page"  className="nav-item">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem >
-          <Link href="#" aria-current="page"  className="nav-item activeNav">
-            Customers
-          </Link>
-        </NavbarItem>
+       
         <NavbarItem>
           <Link color="foreground" href="#"  className="nav-item">
             Contact
@@ -62,7 +49,7 @@ export default function App() {
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
           {/* <Link href="/register" className="loginBtn">Login</Link> */}
-          <Button as={Link}  href="/register"  variant="flat" className="loginBtn">
+          <Button as={Link}  href="/login"  variant="flat" className="loginBtn">
             Login
           </Button>
         </NavbarItem>
