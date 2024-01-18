@@ -21,7 +21,7 @@ import * as Yup from 'yup';
 export default function Home() {
   return (
     <>
-      <Layout>
+      <Layout> 
       <BreadCrumb page="Register" />
         <Section heading="Register" subHeading="Create your account">
         <div className=" lg:w-1/2 md:w-2/3 sm:w-full container mx-auto columns-1 px-5 login-form" >

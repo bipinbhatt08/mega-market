@@ -4,7 +4,7 @@ import React from 'react'
 const page = () => {
   return (
     <>
-        <footer className="text-gray-600 body-font bg-neutral border ">
+        <footer className="text-gray-600 body-font bg-neutral  border bg-black-300 ">
             <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
                 <img src="/gharJaggaLogo.png" alt="" height={75} width={75} />
                 <p className="font-bold text-inherit">GHAR<span style={{color: "rgb(255,90,95)"}}>JAGGA</span></p>
