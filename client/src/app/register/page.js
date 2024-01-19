@@ -2,60 +2,118 @@
 import Layout from '@/components/layout/page'
 import Section from '@/components/sectionLayout/page'
 import BreadCrumb from "@/components/breadcrumb/page"
-import { Input, Button,Link} from "@nextui-org/react"
+import { Input, Button} from "@nextui-org/react"
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Link from 'next/link'
+
+export default function Login() {
+
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
       .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('Required'),
+      .max(50, 'Too Long!'),
     password: Yup.string()
-      .min(6, 'Too Short!')
-      .max(50, 'Too Long!')
       .required('Required'),
     email: Yup.string().email('Invalid email').required('Required'),
+    confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Required'),
   });
-
-export default function Home() {
+  
+  const handleRegister = async(values)=>{
+      const res = await fetch('http://localhost:5000/register',{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(values)
+      })
+      const data = await res.json()
+      alert(data.message)
+      }
+  
+  
+  const formik = useFormik({
+    initialValues: {
+    username:'',
+    email: '',
+    password: '',
+    confirmPassword:''
+    },
+    validationSchema: SignupSchema,
+    onSubmit: values => {
+    handleRegister(values)
+    },
+    });
   return (
     <>
-      <Layout> 
-      <BreadCrumb page="Register" />
-        <Section heading="Register" subHeading="Create your account">
-        <div className=" lg:w-1/2 md:w-2/3 sm:w-full container mx-auto columns-1 px-5 login-form" >
-            <Formik
-              initialValues={{
-                username: '',
-                password: '',
-                email: '',
-              }}
-              
-              validationSchema={SignupSchema}
-              onSubmit={values => {
-                // same shape as initial values
-                console.log(values);
-              }}
-            >
-              {({ errors, touched }) => (
-                <Form>
-                  <Input type="text" name="username" variant="bordered" label="Username"  size="sm"  radius="sm"  className="mb-3 " borderColor="red" isRequired />
-                  <Input type="email" email="email" variant="bordered" label="Email"  size="sm"  radius="sm" className="mb-3"  isRequired/>
-                  {errors.email && touched.email ? <div>{errors.email}</div> : null}
-                  <Input type="password" name = "password" variant="bordered" label="Password"  size="sm"  radius="sm"  className="mb-3 " isRequired/>
-                  <Input type="password"  name="confirmPassword" variant="bordered" label="Confirm Password"  size="sm"  radius="sm" className="mb-3 "  isRequired/>
+        <Layout>
+          <BreadCrumb page="Sign Up" />
+          <Section heading="Sign Up" subHeading="Begin Your Experience ">
+          <div className=" lg:w-1/2 md:w-2/3 sm:w-full container mx-auto columns-1 px-5 login-form" >
+                <form onSubmit={formik.handleSubmit}>
+                  <Input 
+                  type="text" 
+                  name="username" 
+                  onChange={formik.handleChange}
+                  value={formik.values.username} 
+                  variant="bordered" 
+                  label="Username"  
+                  size="sm"  
+                  radius="sm" 
+                  className="mb-3"  
+                  // isInvalid={!formik.isValid}
+                  errorMessage={formik.errors?.username}
+                  isRequired/>
+                  <Input 
+                  type="email" 
+                  name="email" 
+                  onChange={formik.handleChange}
+                  value={formik.values.email} 
+                  variant="bordered" 
+                  label="Email"  
+                  size="sm"  
+                  radius="sm" 
+                  className="mb-3"  
+                  // isInvalid={!formik.isValid}
+                  errorMessage={formik.errors?.email}
+                  isRequired/>
+                  
+
+                  <Input 
+                  type="password" 
+                  onChange={formik.handleChange}
+                  value={formik.values.password} 
+                  name = "password" 
+                  variant="bordered" 
+                  label="Password"  
+                  size="sm"  
+                  radius="sm"  
+                  className="mb-3 " 
+                   // isInvalid={!formik.isValid}
+                   errorMessage={formik.errors?.password}
+                  isRequired/>
+                  <Input 
+                  type="password" 
+                  onChange={formik.handleChange}
+                  value={formik.values.confirmPassword} 
+                  name = "confirmPassword" 
+                  variant="bordered" 
+                  label="Confirm Password"  
+                  size="sm"  
+                  radius="sm"  
+                  className="mb-3 " 
+                   // isInvalid={!formik.isValid}
+                   errorMessage={formik.errors?.confirmPassword}
+                  isRequired/>
                   <Button  variant="flat" fullWidth type="submit" className="signUpBtn mt-3 mb-3" >
                     Sign Up
                   </Button>
                   <p className="text-center ">Already have account? <Link href="/login"className="color-red">Login</Link></p>
-                </Form>
-              )}
-            </Formik>
+                </form>
           </div>
           </Section>
-      </Layout>
+        </Layout>
     </>
   )
-}
-      
+  }
