@@ -7,9 +7,12 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation'
 
 export default function Login() {
-
+  const router = useRouter()
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
       .min(2, 'Too Short!')
@@ -23,13 +26,19 @@ export default function Login() {
   });
   
   const handleRegister = async(values)=>{
+      
       const res = await fetch('http://localhost:5000/register',{
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(values)
       })
       const data = await res.json()
-      alert(data.message)
+      if(res.status!==200){
+        return toast.warning(data.message)
+        
+      }
+      toast.success(data.message)
+      router.push("/login")
       }
   
   
@@ -49,8 +58,8 @@ export default function Login() {
     <>
         <Layout>
           <BreadCrumb page="Sign Up" />
-          <Section heading="Sign Up" subHeading="Begin Your Experience ">
-          <div className=" lg:w-1/2 md:w-2/3 sm:w-full container mx-auto columns-1 px-5 login-form" >
+          <Section heading="Sign Up" subHeading="Begin Your Experience "bg="bg-gray-100">
+          <div className=" lg:w-1/2 md:w-2/3 sm:w-full container mx-auto py-5 my-5 rounded-lg columns-1  login-form bg-white" >
                 <form onSubmit={formik.handleSubmit}>
                   <Input 
                   type="text" 

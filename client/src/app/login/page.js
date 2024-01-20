@@ -2,10 +2,11 @@
 import Layout from '@/components/layout/page'
 import Section from '@/components/sectionLayout/page'
 import BreadCrumb from "@/components/breadcrumb/page"
-import { Input, Button,Link} from "@nextui-org/react"
+import { Input, Button} from "@nextui-org/react"
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Link from 'next/link'
 
 export default function Login() {
   
@@ -29,9 +30,9 @@ export default function Login() {
     <>
         <Layout>
           <BreadCrumb page="Login" />
-          <Section heading="Login" subHeading="Sign in for personalized features ">
-          <div className=" lg:w-1/2 md:w-2/3 sm:w-full container mx-auto columns-1 px-5 login-form" >
-                <form onSubmit={formik.handleSubmit}>
+          <Section heading="Login" subHeading="Sign in for personalized features" bg="bg-gray-100">
+          <div className=" lg:w-1/2 md:w-2/3 sm:w-full container bg-white py-5 my-5  rounded-lg mx-auto columns-1  login-form" >
+                <form onSubmit={formik.handleSubmit} className=''>
                   <Input 
                   type="email" 
                   name="email" 
@@ -63,7 +64,7 @@ export default function Login() {
                   <Button  variant="flat" fullWidth type="submit" className="signUpBtn mt-3 mb-3" >
                     Sign Up
                   </Button>
-                  <p className="text-center ">Already have account? <Link href="/login"className="color-red">Login</Link></p>
+                  <p className="text-center ">Don't have account? <Link href="/register"className="color-red">Register</Link></p>
                 </form>
           </div>
           </Section>
