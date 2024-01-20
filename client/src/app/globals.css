@@ -14,6 +14,12 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 .nav-item{
   color: var(--foreground-rgb)
 }

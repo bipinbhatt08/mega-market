@@ -1,6 +1,8 @@
 import React from 'react'
 import { CiHeart } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
+import {User} from "@nextui-org/react";
+import Link from 'next/link';
 
 const page = (props) => {
   return (
@@ -33,12 +35,24 @@ const page = (props) => {
             </div>
             </div>
           <div className="border-t flex  justify-between items-center py-3 px-2 w-full ">
-            <div className="flex justify-between items-center ">
+            {/* <div className="flex justify-between items-center ">
                 <div className="avatar-container">
                     <img className='w-full h-full object-cover rounded-full' src={props.avatar} alt="" />
                 </div>
                 <p className='text-gray-500 ml-1 font-light text-sm'>{props.ownerName}</p>
-            </div>
+            </div> */}
+            <User   
+      name={props.ownerName}
+      description={(
+        <Link href="https://twitter.com/jrgarciadev" size="sm" isExternal>
+          {props.username}
+          @bipinbhatt08
+        </Link>
+      )}
+      avatarProps={{
+        src: props.avatar
+      }}
+    />
             <p className='text-gray-500 ml-1 font-light text-sm'>{props.postedOn} days ago</p>
           </div>
         </div>
