@@ -7,21 +7,36 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link'
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Login() {
   
-  const SignupSchema = Yup.object().shape({
+  const SigninSchema = Yup.object().shape({
     password: Yup.string()
       .required('Required'),
     email: Yup.string().email('Invalid email').required('Required'),
   });
+
+  const handleLogin=async(values)=>{
+    const res = await fetch('http://localhost:5000/login',{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(values)
+      })
+      const data = await res.json()
+      if(res.status!==200){
+        return toast.warning(data.message)
+      }
+      toast.success(data.message)
+  }
+
 
   const formik = useFormik({
     initialValues: {
     email: '',
     password: ''
     },
-    validationSchema: SignupSchema,
+    validationSchema: SigninSchema,
     onSubmit: values => {
     handleLogin(values)
     },
@@ -62,7 +77,7 @@ export default function Login() {
                    errorMessage={formik.errors?.password}
                   isRequired/>
                   <Button  variant="flat" fullWidth type="submit" className="signUpBtn mt-3 mb-3" >
-                    Sign Up
+                    Sign In
                   </Button>
                   <p className="text-center ">Don't have account? <Link href="/register"className="color-red">Register</Link></p>
                 </form>

@@ -44,7 +44,7 @@ const page = (props) => {
             <User   
       name={props.ownerName}
       description={(
-        <Link href="https://twitter.com/jrgarciadev" size="sm" isExternal>
+        <Link href="https://twitter.com/jrgarciadev" size="sm" >
           {props.username}
           @bipinbhatt08
         </Link>
