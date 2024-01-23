@@ -3,6 +3,7 @@
 import Layout from '@/components/layout/page'
 import Section from '@/components/sectionLayout/page'
 import PropertyCard from '@/components/propertyCard/page'
+
 export default function Home() {
   return (
     <>
