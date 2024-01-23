@@ -3,7 +3,7 @@ import './globals.css'
 import {Providers} from "./providers";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import reduxProvider from './redux/reduxProvider';
+import ReduxProvider from './redux/reduxProvider';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" >
       <body className={inter.className}>
-        <reduxProvider>
+        <ReduxProvider>
         <Providers>
         <ToastContainer
           position="top-left"
@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
         {children}
 
         </Providers>
-        </reduxProvider>
+        </ReduxProvider>
         </body>
     </html>
   )
