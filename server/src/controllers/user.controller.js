@@ -1,5 +1,7 @@
 const User = require("../models/user.model")
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 const saltRounds = 10;
 exports.registerNewUser = async(req,res)=>{
     try {
@@ -45,10 +47,15 @@ exports.loginUser = async(req,res)=>{
                 message:"Invalid email or password"
             })
         }
+        const token = jwt.sign({ email }, 'shhhadkfjkkjkjalkduew097347837&^&*#(@*hh');
+        
         res.status(200).json({
             message: " User logged in succesfully "
         })
     } catch (error) {
         console.log(error)
+        res.status(500).json({
+            message:"Internal server error"
+        })
     }
 }
