@@ -3,7 +3,7 @@ import './globals.css'
 import {Providers} from "./providers";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ReduxProvider from './redux/reduxProvider';
+import ReduxProvider from '@/redux/reduxProvider';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
