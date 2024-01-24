@@ -3,8 +3,6 @@
 import Layout from '@/components/layout/page'
 import Section from '@/components/sectionLayout/page'
 import PropertyCard from '@/components/propertyCard/page'
-import { useSelector,useDispatch } from 'react-redux'
-import {increment,decrement} from  '@/redux/reducerSlice/countSlice'
 export default function Home() {
   const {count}= useSelector(state=>state.count)
   const dispatch = useDispatch()
