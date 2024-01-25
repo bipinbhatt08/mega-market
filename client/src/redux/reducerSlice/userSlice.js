@@ -16,7 +16,7 @@ export const userSlice = createSlice({
 }});
 
 // this is for dispatch
-export const { addUserDetail } = userSlice.actions;
+export const {addUserDetail } = userSlice.actions;
 
 // this is for configureStore
 export default userSlice.reducer;
