@@ -50,12 +50,15 @@ exports.loginUser = async(req,res)=>{
         const token = jwt.sign({ email }, 'shhhadkfjkkjkjalkduew097347837&^&*#(@*hh');
         
         res.status(200).json({
-            message: " User logged in succesfully "
+            message: " User logged in succesfully ",
+            token, 
+            userDetails: userExist
         })
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            message:"Internal server error"
+            message:"Internal server error",
+            
         })
     }
 }

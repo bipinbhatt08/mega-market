@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import Link from 'next/link'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addUserDetail } from '@/redux/reducerSlice/userSlice'
 
 export default function Login() {
@@ -28,10 +28,10 @@ export default function Login() {
       })
       const data = await res.json()
       if(res.status!==200){
-        dispatch(addUserDetail())
-        return toast.warning(data.message)
+        toast.warning(data.message)
+        return
       }
-
+      dispatch(addUserDetail(data))
       toast.success(data.message)
   }
 

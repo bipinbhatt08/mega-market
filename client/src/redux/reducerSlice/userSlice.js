@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 const initialState ={
-  token: 0,
+  token: "",
   userDetails:{},
   isLoggedIn: false
 }
@@ -11,8 +10,14 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     addUserDetail: (state, action) => {
-     
+     const {token,userDetails}= action.payload
+     return {
+      userDetails,
+      token,
+      isLoggedIn:true
+  }
   },
+
 }});
 
 // this is for dispatch
