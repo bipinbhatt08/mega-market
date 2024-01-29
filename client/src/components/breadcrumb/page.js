@@ -6,7 +6,7 @@ const page = (props) => {
     <>
       <div className="breadcrumb-container ">
         <div className="breadcrumb mx-auto flex flex-col items-center">
-            <h1 className='text-center text-4xl font-semibold mb-5' >{props.page}</h1>
+            <h1 className='text-center text-black text-4xl font-semibold mb-5' >{props.page}</h1>
             <Breadcrumbs color='danger'>
                 <BreadcrumbItem >Home</BreadcrumbItem>
                 <BreadcrumbItem >{props.page}</BreadcrumbItem>

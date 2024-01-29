@@ -7,8 +7,8 @@ const page = () => {
         <footer className="text-gray-600 body-font bg-neutral  border bg-black-300 ">
             <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
                 <img src="/gharJaggaLogo.png" alt="" height={75} width={75} />
-                <p className="font-bold text-inherit">GHAR<span style={{color: "rgb(255,90,95)"}}>JAGGA</span></p>
-                <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2024 GharJagga —
+                <p className="font-bold text-inherit">MEGA<span style={{color: "rgb(255,90,95)"}}>MARKET</span></p>
+                <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2024 MegaMarket —
                         <a href="https://twitter.com/knyttneve" className="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@bipinbhatt</a>
                 </p>
                 <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">

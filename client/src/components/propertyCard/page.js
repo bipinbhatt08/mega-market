@@ -42,17 +42,17 @@ const page = (props) => {
                 <p className='text-gray-500 ml-1 font-light text-sm'>{props.ownerName}</p>
             </div> */}
             <User   
-      name={props.ownerName}
-      description={(
-        <Link href="https://twitter.com/jrgarciadev" size="sm" >
-          {props.username}
-          @bipinbhatt08
-        </Link>
-      )}
-      avatarProps={{
-        src: props.avatar
-      }}
-    />
+              name={props.ownerName}
+              description={(
+                <Link href="https://twitter.com/jrgarciadev" size="sm" >
+                  {props.username}
+                  @bipinbhatt08
+                </Link>
+              )}
+              avatarProps={{
+                src: props.avatar
+              }}
+            />
             <p className='text-gray-500 ml-1 font-light text-sm'>{props.postedOn} days ago</p>
           </div>
         </div>

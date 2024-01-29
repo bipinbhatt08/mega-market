@@ -1,9 +1,11 @@
 'use client'
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuToggle,NavbarMenu,NavbarMenuItem,DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
+import {Navbar, NavbarBrand,Tooltip,Badge,Input, NavbarContent, NavbarItem, Button, NavbarMenuToggle,NavbarMenu,NavbarMenuItem,DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
 import { color } from "framer-motion";
 import Link from 'next/link'
 import { useSelector } from "react-redux";
+import { FaCartPlus , FaHeart,} from "react-icons/fa";
+import { CiSearch} from "react-icons/ci";
 
 export default function App() {
 
@@ -24,6 +26,36 @@ export default function App() {
   ];
     const UserAvatarDropDown = ()=>{
       return <>
+       
+       <NavbarItem className="hidden lg:flex">
+        <Badge content="0" shape="circle" color="danger" >
+        <Tooltip showArrow={true} color="danger" content="Cart">
+        <Button
+            radius="full"
+            isIconOnly
+            aria-label="more than 99 notifications"
+            variant="light"
+            >
+            <FaCartPlus size={24} color="red" />
+          </Button>
+        </Tooltip>
+        </Badge>
+       </NavbarItem>
+       <NavbarItem className="mr-2 hidden lg:flex">
+       <Badge content="0" shape="circle" color="danger">
+       <Tooltip showArrow={true} color="danger" content="Wishlist">
+          <Button
+            radius="full"
+            isIconOnly
+            aria-label="more than 99 notifications"
+            variant="light"
+          >
+            <FaHeart size={24} color="red" />
+          </Button>
+          </Tooltip>
+        </Badge>
+       </NavbarItem>
+    
       <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
@@ -31,7 +63,6 @@ export default function App() {
               as="button"
               className="transition-transform"
               color="danger"
-              
               name="Jason Hughes"
               size="sm"
               src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
@@ -42,12 +73,6 @@ export default function App() {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">zoey@example.com</p>
             </DropdownItem>
-            <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
-            <DropdownItem key="analytics">Analytics</DropdownItem>
-            <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem key="configurations">Configurations</DropdownItem>
-            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
             <DropdownItem key="logout" color="danger" onClick={()=>{set}}>
               Log Out
             </DropdownItem>
@@ -57,7 +82,7 @@ export default function App() {
     }
     const AuthButtons = ()=>{
       return <>
-      <NavbarItem className="hidden lg:flex">
+      <NavbarItem >
           {/* <Link href="/register" className="loginBtn">Login</Link> */}
           <Button as={Link}  href="/login"  variant="flat" className="loginBtn">
             Login
@@ -72,22 +97,31 @@ export default function App() {
     }
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered shouldHideOnScroll>
-      <NavbarContent>
+    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered shouldHideOnScroll >
+      <NavbarContent justify="start">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
-        <NavbarBrand>
+        <NavbarBrand >
           <img src="/gharJaggaLogo.png" alt="" height={75} width={75} />
-          <p className="font-bold text-inherit">GHAR<span style={{color: "rgb(255,90,95)"}}>JAGGA</span></p>
+          <p className="font-bold text-inherit hidden lg:flex md:flex">MEGA<span style={{color: "rgb(255,90,95)"}}>MARKET</span></p>
         </NavbarBrand>
-      </NavbarContent>
-
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+     
+        <NavbarContent className="hidden sm:flex gap-4">
         <NavbarItem>
           <Link color="foreground" href="#" className="nav-item">
             About Us
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="#" className="nav-item">
+            Products
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="#" className="nav-item">
+            Categories
           </Link>
         </NavbarItem>
        
@@ -97,7 +131,23 @@ export default function App() {
           </Link>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent justify="end">
+      </NavbarContent>
+
+      <NavbarContent justify="end " className=" md:flex lg:flex">
+      <NavbarItem  className="hidden md:flex lg:flex">
+      <Input
+          classNames={{
+            base: "max-w-full sm:max-w-[10rem] h-10 ",
+            mainWrapper: "h-full",
+            input: "text-small",
+            inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+          }}
+          placeholder="Type to search..."
+          size="sm"
+          startContent={<CiSearch size={18} />}
+          type="search"
+        />
+      </NavbarItem>
         {(!isLoggedIn)?<AuthButtons/>:<UserAvatarDropDown/>
         }
       </NavbarContent>

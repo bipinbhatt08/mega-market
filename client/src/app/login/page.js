@@ -11,9 +11,15 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux'
 import { addUserDetail } from '@/redux/reducerSlice/userSlice'
+import { useRouter } from 'next/navigation'
+
 
 export default function Login() {
+
+
   const dispatch = useDispatch()
+
+  const router = useRouter()
   const SigninSchema = Yup.object().shape({
     password: Yup.string()
       .required('Required'),
@@ -33,6 +39,8 @@ export default function Login() {
       }
       dispatch(addUserDetail(data))
       toast.success(data.message)
+      router.push('/')
+
   }
 
 
@@ -46,6 +54,7 @@ export default function Login() {
     handleLogin(values)
     },
     });
+
   return (
     <>
         <Layout>
