@@ -14,7 +14,9 @@ connection()
 app.use(express.json())
 
 const userRoute = require('./routes/user.route.js')
+const productRoute = require('./routes/product.route.js')
 app.use('',userRoute)
+app.use('',productRoute)
 app.listen(port, () => {
   console.log(`GharJagga app listening on port ${port}`)
 })

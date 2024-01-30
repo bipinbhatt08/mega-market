@@ -3,14 +3,17 @@ import React from "react";
 import {Navbar, NavbarBrand,Tooltip,Badge,Input, NavbarContent, NavbarItem, Button, NavbarMenuToggle,NavbarMenu,NavbarMenuItem,DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
 import { color } from "framer-motion";
 import Link from 'next/link'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import { FaCartPlus , FaHeart,} from "react-icons/fa";
 import { CiSearch} from "react-icons/ci";
+import { logout } from "@/redux/reducerSlice/userSlice";
+import { toast } from "react-toastify";
 
 export default function App() {
 
   const {isLoggedIn}= useSelector(state=>state.user)
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const dispatch = useDispatch()
 
   const menuItems = [
     "Profile",
@@ -25,6 +28,12 @@ export default function App() {
     "Log Out",
   ];
     const UserAvatarDropDown = ()=>{
+
+      const handleLogout =()=>{
+        // toast.warning("hello")
+        
+        dispatch(logout())
+      }
       return <>
        
        <NavbarItem className="hidden lg:flex">
@@ -73,7 +82,7 @@ export default function App() {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">zoey@example.com</p>
             </DropdownItem>
-            <DropdownItem key="logout" color="danger" onClick={()=>{set}}>
+            <DropdownItem key="logout" color="danger" onClick={handleLogout}>
               Log Out
             </DropdownItem>
           </DropdownMenu>
