@@ -18,7 +18,7 @@ const page = (props) => {
     
     console.log(productDetails._id)
     dispatch(addToCart({productDetails}))
-    router.push('/')
+    router.push('/cart')
   }
   return (
     <>
