@@ -12,9 +12,10 @@ import { toast } from "react-toastify";
 export default function App() {
 
   const {isLoggedIn}= useSelector(state=>state.user)
+  const {products}= useSelector(state=>state.cart)
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const dispatch = useDispatch()
-
+  const noOfitemsInCart = Object.keys(products).length;
   const menuItems = [
     "Profile",
     "Dashboard",
@@ -37,7 +38,7 @@ export default function App() {
       return <>
        
        <NavbarItem className="hidden lg:flex">
-        <Badge content="0" shape="circle" color="danger" >
+        <Badge content={noOfitemsInCart} shape="circle" color="danger" >
         <Tooltip showArrow={true} color="danger" content="Cart">
         <Button
             radius="full"
@@ -112,10 +113,12 @@ export default function App() {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
-        <NavbarBrand >
-          <img src="/gharJaggaLogo.png" alt="" height={75} width={75} />
-          <p className="font-bold text-inherit hidden lg:flex md:flex">MEGA<span style={{color: "rgb(255,90,95)"}}>MARKET</span></p>
-        </NavbarBrand>
+        <Link href={'/'}>
+          <NavbarBrand >
+            <img src="/gharJaggaLogo.png" alt="" height={75} width={75} />
+            <p className="font-bold text-inherit hidden lg:flex md:flex">MEGA<span style={{color: "rgb(255,90,95)"}}>MARKET</span></p>
+          </NavbarBrand>
+        </Link>
      
         <NavbarContent className="hidden sm:flex gap-4">
         <NavbarItem>
