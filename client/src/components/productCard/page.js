@@ -28,7 +28,12 @@ const page = (props) => {
                     <img className="h-full w-full object-contain" src={props.productDetails.imageUrl}/>
                 <div className='flex  w-2/3 absolute top-3 left-3'>
                     {/* <p className=' color-white  text-center text-xs  py-1 px-2 bg-black  rounded-md'>Featured</p> */}
-                    <p className='  color-white   ml-1 py-1 px-2 text-xs  bg-red-500  text-center rounded-md'>20% Off</p>
+                    {
+                        props.productDetails.discount>0?<p className='  color-white   ml-1 py-1 px-2 text-xs  bg-red-500  text-center rounded-md'>
+                            {props.productDetails.discount}% Off
+                        </p>:null
+                      }
+                    
                 </div>
             </div>
 
