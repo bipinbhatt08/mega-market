@@ -1,5 +1,6 @@
 'use client'
 import { addToCart } from "@/redux/reducerSlice/cartSlice";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CiHeart } from "react-icons/ci";
 import { useSelector,useDispatch } from 'react-redux';
@@ -40,7 +41,7 @@ const page = (props) => {
             <div className="p-2 border-t ">
                 <p className="text-red-500 text-sm pt-1 ">{props.productDetails.category}</p>
                 <div className="py-1">
-                    <h1 className='font-semibold text-gray-800'>{props.productDetails.title}</h1>
+                    <Link href={`/products/${productDetails._id}`}><h1 className='font-semibold text-gray-800'>{props.productDetails.title}</h1></Link>
                     <h2 className='py-1 text-grey-500 font-semibold'> Rs {props.productDetails.price}/-</h2>
                     <p className='text-sm'>{props.productDetails.description}</p>
                 </div>

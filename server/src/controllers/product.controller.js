@@ -41,3 +41,24 @@ exports.addProduct = async(req,res)=>{
     }
 
 }
+
+exports.getSingleProduct = async(req,res)=>{
+
+    try {
+        console.log(req)
+        const {id} = req.params
+        const product = await Product.findById(id)
+
+        if(!product){
+           return res.status(404).json({
+                message:"No Product Found"
+            })
+        }
+        res.status(200).json({
+            message:"Product fetched succesfully",
+            product
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}

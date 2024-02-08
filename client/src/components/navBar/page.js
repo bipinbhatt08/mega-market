@@ -41,6 +41,8 @@ export default function App() {
         <Badge content={noOfitemsInCart} shape="circle" color="danger" >
         <Tooltip showArrow={true} color="danger" content="Cart">
         <Button
+            as={Link}
+            href ="/cart"
             radius="full"
             isIconOnly
             aria-label="more than 99 notifications"
