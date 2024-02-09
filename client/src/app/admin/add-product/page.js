@@ -31,7 +31,8 @@ export default function AddProduct() {
       price: '',
       discount: '',
       category: '',
-      imageUrl:''
+      imageUrl:'',
+      quantity:''
     },
     // validationSchema,
     onSubmit: values => {
@@ -77,7 +78,7 @@ export default function AddProduct() {
                 />            
               </div>
             
-            <div className=' lg:w-1/3 md:w-1/3 w-1/2 px-2 py-1'>
+            <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
             <Input 
                   type="number" 
                   name="price" 
@@ -92,7 +93,7 @@ export default function AddProduct() {
                   errorMessage={formik.errors?.price}
                   isRequired/>
             </div>
-            <div className=' lg:w-1/3 md:w-1/3 w-1/2 px-2 py-1'>
+            <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
               <Input 
                   type="number" 
                   name="discount" 
@@ -107,11 +108,26 @@ export default function AddProduct() {
                   errorMessage={formik.errors?.discount}
                   isRequired/>
             </div>
+            <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
+              <Input 
+                  type="number" 
+                  name="quantity" 
+                  onChange={formik.handleChange}
+                  value={formik.values.quantity} 
+                  variant="bordered" 
+                  label="Quantity"  
+                  size="sm"  
+                  radius="sm" 
+                  className="mb-3"  
+                  // isInvalid={!formik.isValid}
+                  errorMessage={formik.errors?.quantity}
+                  isRequired/>
+            </div>
             {/* <div className=' lg:w-1/3 md:w-1/2 w-2/3 px-2 py-1'>
               <label htmlFor="title" className=''>Property Media</label> <br />
               <FileUploader   multiple="true" label="Click Here Or Drop Files To Upload" required="true" />
             </div> */}
-            <div className=' lg:w-1/3 md:w-1/3 w-full px-2 py-1'>
+            <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
               <Select
                 isRequired
                 placeholder="Select category"
