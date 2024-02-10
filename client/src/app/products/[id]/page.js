@@ -56,14 +56,14 @@ export default function Products({ params }) {
                 </div>
                 <div className="flex border-t border-gray-200 py-2">
                   <span className="text-gray-500">Available Quantity</span>
-                  <span className="ml-auto text-gray-900">{product.quantity}20</span>
+                  <span className="ml-auto text-gray-900">{product.quantity}</span>
                 </div>
                 <div className="flex border-t border-b mb-6 border-gray-200 py-2">
                   <span className="text-gray-500"> Discount</span>
                   <span className="ml-auto text-gray-900">{product.discount!==0?product.discount:0}%</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <h2 className="title-font font-medium text-2xl text-gray-900">Rs. {product.price!==0?(product.price*(100-product.discount)*0.01).toFixed(2):product.price}/-</h2>
+                  <h2 className="title-font font-medium text-2xl text-gray-900">Rs. {product.dicount!==0?(product.price*(100-product.discount)*0.01).toFixed(2):product.price}/-</h2>
                   <div className='flex justify-between align-center '>
                     <button className='border border-red-500 text-white bg-red-500 rounded text-sm mr-2  py-1 px-2' onClick={handleAddTocart}>Add to cart  </button>
 

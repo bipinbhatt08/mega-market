@@ -129,7 +129,7 @@ export default function App() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#" className="nav-item">
+          <Link color="foreground" href="/products" className="nav-item">
             Products
           </Link>
         </NavbarItem>
