@@ -15,8 +15,9 @@ export default function Products({ params }) {
   const router = useRouter()
 
   const [product,setProduct]=useState({})
+  const discountedPrice = product.dicount!==0?(product.price*(100-product.discount)*0.01).toFixed(2):product.price
 
-  const fetchProducts = async()=>{
+  const fetchProduct = async()=>{
     const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${params.id}`,{
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
@@ -26,12 +27,13 @@ export default function Products({ params }) {
   }
 
   const handleAddTocart = ()=>{
-    dispatch(addToCart({productDetails:product}))
+    const productDetails = {...product,discountedPrice }
+    dispatch(addToCart({productDetails}))
     router.push('/cart')
   }
 
   useEffect(() => {
-    fetchProducts()
+    fetchProduct()
   }, [])
 
   return (
@@ -63,7 +65,7 @@ export default function Products({ params }) {
                   <span className="ml-auto text-gray-900">{product.discount!==0?product.discount:0}%</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <h2 className="title-font font-medium text-2xl text-gray-900">Rs. {product.dicount!==0?(product.price*(100-product.discount)*0.01).toFixed(2):product.price}/-</h2>
+                  <h2 className="title-font font-medium text-2xl text-gray-900">Rs. {discountedPrice}/-</h2>
                   <div className='flex justify-between align-center '>
                     <button className='border border-red-500 text-white bg-red-500 rounded text-sm mr-2  py-1 px-2' onClick={handleAddTocart}>Add to cart  </button>
 

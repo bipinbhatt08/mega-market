@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 export default function App() {
 
-  const {isLoggedIn}= useSelector(state=>state.user)
+  const {isLoggedIn,userDetails}= useSelector(state=>state.user)
   const {products}= useSelector(state=>state.cart)
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const dispatch = useDispatch()
@@ -83,7 +83,7 @@ export default function App() {
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">zoey@example.com</p>
+              <p className="font-semibold">{userDetails.email}</p>
             </DropdownItem>
             <DropdownItem key="logout" color="danger" onClick={handleLogout}>
               Log Out

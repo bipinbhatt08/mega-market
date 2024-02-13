@@ -16,8 +16,8 @@ const page = (props) => {
     if(!isLoggedIn){
       return router.push('/login')
     }
-    
-    console.log(productDetails._id)
+    const discountedPrice = productDetails.dicount!==0?(productDetails.price*(100-productDetails.discount)*0.01).toFixed(2):productDetails.price
+    productDetails.discountedPrice= discountedPrice
     dispatch(addToCart({productDetails}))
     router.push('/cart')
   }
