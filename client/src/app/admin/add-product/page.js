@@ -31,7 +31,7 @@ export default function AddProduct() {
       price: '',
       discount: '',
       category: '',
-      imageUrl:'',
+      productImage:'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg',
       quantity:''
     },
     // validationSchema,
@@ -123,10 +123,19 @@ export default function AddProduct() {
                   errorMessage={formik.errors?.quantity}
                   isRequired/>
             </div>
-            {/* <div className=' lg:w-1/3 md:w-1/2 w-2/3 px-2 py-1'>
-              <label htmlFor="title" className=''>Property Media</label> <br />
-              <FileUploader   multiple="true" label="Click Here Or Drop Files To Upload" required="true" />
-            </div> */}
+            <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
+              <Input 
+                  type="file" 
+                  name="productImage" 
+                  // onChange={formik.handleChange}
+                  variant="bordered"
+                  size="sm"  
+                  radius="sm" 
+                  className="mb-3"  
+                  // isInvalid={!formik.isValid}
+                  errorMessage={formik.errors?.productImage}
+                  />
+            </div>
             <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
               <Select
                 isRequired

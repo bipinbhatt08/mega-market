@@ -23,7 +23,8 @@ exports.getAllProducts = async(req,res)=>{
 exports.addProduct = async(req,res)=>{
     try {
         const {title,price,description,discount,category,quantity} = req.body
-        
+
+        const productImage= req.file?.filename 
         await Product.create({
             title,
             price,
@@ -31,7 +32,7 @@ exports.addProduct = async(req,res)=>{
             discount,
             category,
             quantity,
-            imageUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx09klQ8vzKAIrXgsYx8atQ1yCAvcIxpHLaRYyPgeLwg&s"
+            productImage
         })
     
         res.status(200).json({
