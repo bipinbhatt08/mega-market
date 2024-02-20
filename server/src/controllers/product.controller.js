@@ -47,7 +47,7 @@ exports.addProduct = async(req,res)=>{
 exports.getSingleProduct = async(req,res)=>{
 
     try {
-        console.log(req)
+        // console.log(req)
         const {id} = req.params
         const product = await Product.findById(id)
 

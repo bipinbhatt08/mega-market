@@ -23,10 +23,13 @@ const page = (props) => {
   }
   return (
     <>
+    {JSON.stringify(props.productDetails)}
       <div className="px-4 pb-4 lg:w-1/3 ">
+       
         <div className=" bg-white border product-card  bg-opacity-75 px-2 rounded-lg  overflow-hidden  relative">
+        
             <div className="product-image-container py-2 relative  ">
-                    <img className="h-full w-full object-cover" src={props.productDetails.imageUrl}/>
+            <img className="h-full w-full object-cover" src={`/uploads/productImgs/`} />
                 <div className='flex  w-2/3 absolute top-3 left-3'>
                     {/* <p className=' color-white  text-center text-xs  py-1 px-2 bg-black  rounded-md'>Featured</p> */}
                     {
@@ -54,6 +57,7 @@ const page = (props) => {
                     <CiHeart color='red' size={28} className='cursor-pointer border border-red-500 rounded hover:bg-red-100  hover:text-white ' />
                     <button className='border border-red-500 text-white bg-red-500 rounded text-sm  py-1 px-2' onClick={handleAddTocart}>Add to cart  </button>
                 </div>
+
             </div>
         </div>
 

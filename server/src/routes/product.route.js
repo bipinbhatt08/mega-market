@@ -10,7 +10,7 @@ var storage = multer.diskStorage({
       cb(new Error("Invalid file type. Only supports: jpeg,png and jpg"))
       return
     }
-    cb(null, "uploads/products/");
+    cb(null, "uploads/productImgs/");
   },
   filename: function (req, file, cb) {
     cb(null, (Date.now() + "-" + file.originalname).replace(" ",""));

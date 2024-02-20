@@ -10,6 +10,8 @@ const port = process.env.PORT
 const connection = require("./db/connection")
 connection()
 
+
+app.use(express.static('uploads'));
 //parsing
 app.use(express.json())
 

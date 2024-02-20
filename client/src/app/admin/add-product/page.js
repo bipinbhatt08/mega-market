@@ -3,18 +3,23 @@ import Layout from '@/components/layout/page'
 import Section from '@/components/sectionLayout/page'
 import BreadCrumb from "@/components/breadcrumb/page"
 import { Input, Button,Select, SelectItem,Textarea} from "@nextui-org/react"
-import { FileUploader } from "react-drag-drop-files";
-import React from 'react';
+import React,{useRef} from 'react';
 import { useFormik } from 'formik';
 import { toast } from 'react-toastify'
 
 export default function AddProduct() {
-
+  const uploadImageRef = useRef(null)
   const handleAddProduct=async(values)=>{
+    const formData = new FormData()
+    formData.append('productImage',uploadImageRef.current.files[0])//file append garne ho
+    for(let item in values){
+      formData.append(item,values[item])
+    }
+    console.log(formData)
+    
     const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products`,{
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(values)
+        body: formData
         })
         const data = await res.json()
         if(res.status!==200){
@@ -31,12 +36,10 @@ export default function AddProduct() {
       price: '',
       discount: '',
       category: '',
-      productImage:'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg',
       quantity:''
     },
     // validationSchema,
     onSubmit: values => {
-    console.log(values)
     handleAddProduct(values)
     },
     });
@@ -64,6 +67,7 @@ export default function AddProduct() {
                   errorMessage={formik.errors?.title}
                   isRequired/>
             </div>
+
             <div className=' w-full px-2 py-1 '>
                 <Textarea
                 label="Product Description"
@@ -76,7 +80,7 @@ export default function AddProduct() {
                 value={formik.values.description} 
                 isRequired
                 />            
-              </div>
+            </div>
             
             <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
             <Input 
@@ -132,7 +136,7 @@ export default function AddProduct() {
                   size="sm"  
                   radius="sm" 
                   className="mb-3"  
-                  // isInvalid={!formik.isValid}
+                  ref={uploadImageRef}
                   errorMessage={formik.errors?.productImage}
                   />
             </div>
