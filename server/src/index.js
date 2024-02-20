@@ -17,8 +17,10 @@ app.use(express.json())
 
 const userRoute = require('./routes/user.route.js')
 const productRoute = require('./routes/product.route.js')
+const categoryRoute = require('./routes/category.route.js')
 app.use('',userRoute)
 app.use('',productRoute)
+app.use('',categoryRoute)
 app.listen(port, () => {
-  console.log(`GharJagga app listening on port ${port}`)
+  console.log(`Ecommerce  app listening on port ${port}`)
 })

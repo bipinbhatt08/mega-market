@@ -23,7 +23,6 @@ const page = (props) => {
   }
   return (
     <>
-    {JSON.stringify(props.productDetails)}
       <div className="px-4 pb-4 lg:w-1/3 ">
        
         <div className=" bg-white border product-card  bg-opacity-75 px-2 rounded-lg  overflow-hidden  relative">
@@ -36,13 +35,13 @@ const page = (props) => {
                         props.productDetails.discount>0?<p className='  color-white   ml-1 py-1 px-2 text-xs  bg-red-500  text-center rounded-md'>
                             {props.productDetails.discount}% Off
                         </p>:null
-                      }
+                      } 
                     
                 </div>
             </div>
 
             <div className="p-2 border-t ">
-                <p className="text-red-500 text-sm pt-1 ">{props.productDetails.category}</p>
+                <p className="text-red-500 text-sm pt-1 ">{props.productDetails.category.name.toUpperCase()}</p>
                 <div className="py-1">
                     <Link href={`/products/${productDetails._id}`}><h1 className='font-semibold text-gray-800 hover:text-red-500 transition duration-400 mt-1'>{props.productDetails.title}</h1></Link>
 

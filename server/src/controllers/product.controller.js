@@ -1,15 +1,9 @@
+const { default: mongoose } = require("mongoose")
 const Product = require("../models/product.model")
 
-exports.addProduct = async(req,res)=>{
-    
-    await Product.create(req.body)
-    res.status(200).json({
-        message:"Product added succesfully!"
-    })
-}
 
 exports.getAllProducts = async(req,res)=>{
-    const products = await Product.find()
+    const products = await Product.find().populate('category')
     if(products.length===0){
         return res.status(403).json({
             message:"No products found"
@@ -22,19 +16,7 @@ exports.getAllProducts = async(req,res)=>{
 }
 exports.addProduct = async(req,res)=>{
     try {
-        const {title,price,description,discount,category,quantity} = req.body
-
-        const productImage= req.file?.filename 
-        await Product.create({
-            title,
-            price,
-            description,
-            discount,
-            category,
-            quantity,
-            productImage
-        })
-    
+        await Product.create(req.body)
         res.status(200).json({
             message:"Product created succesfully"
         })
@@ -49,8 +31,10 @@ exports.getSingleProduct = async(req,res)=>{
     try {
         // console.log(req)
         const {id} = req.params
-        const product = await Product.findById(id)
-
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid product ID' });
+          }
+        const product = await Product.findById(id).populate('category')
         if(!product){
            return res.status(404).json({
                 message:"No Product Found"
@@ -61,6 +45,6 @@ exports.getSingleProduct = async(req,res)=>{
             product
         })
     } catch (error) {
-        console.log(error)
+        console.log("ERROR",error)
     }
 }

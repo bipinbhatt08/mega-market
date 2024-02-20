@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux'
 import { addToCart } from '@/redux/reducerSlice/cartSlice'
 import { useRouter } from "next/navigation"
+import { toast } from 'react-toastify';
 
 
 export default function Products({ params }) {
@@ -23,6 +24,10 @@ export default function Products({ params }) {
         headers: {'Content-Type': 'application/json'}
         })
          const data = await res.json()
+         if(res.status!==200){
+          return toast.warning(data.message)
+          
+        }
         setProduct(data.product)
   }
 
@@ -45,7 +50,7 @@ export default function Products({ params }) {
           <div className=" py-20 mx-auto">
             <div className="lg:w-4/5 mx-auto flex flex-wrap">
               <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-                <h2 className="text-sm title-font text-red-500 tracking-widest px-1">{product?.category?.toUpperCase()}</h2>
+                <h2 className="text-sm title-font text-red-500 tracking-widest px-1">{product?.category?.name.toUpperCase()}</h2>
                 <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">{product.title}</h1>
                 <div className="flex mb-4">
                   <a className="flex-grow text-red-500 border-b-2 border-red-500 py-2 text-lg px-1">Description</a>
