@@ -16,7 +16,17 @@ exports.getAllProducts = async(req,res)=>{
 }
 exports.addProduct = async(req,res)=>{
     try {
-        await Product.create(req.body)
+        const {title,price,description,discount,category,quantity} = req.body
+        const productImage= req.file?.filename 
+        await Product.create({
+            title,
+            price,
+            description,
+            discount,
+            category,
+            quantity,
+            productImage
+        })
         res.status(200).json({
             message:"Product created succesfully"
         })

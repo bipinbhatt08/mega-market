@@ -28,7 +28,7 @@ const page = (props) => {
         <div className=" bg-white border product-card  bg-opacity-75 px-2 rounded-lg  overflow-hidden  relative">
         
             <div className="product-image-container py-2 relative  ">
-            <img className="h-full w-full object-cover" src={`/uploads/productImgs/`} />
+            <img className="h-full w-full object-cover" src={"http://localhost:5000/productImgs/"+productDetails.productImage} />
                 <div className='flex  w-2/3 absolute top-3 left-3'>
                     {/* <p className=' color-white  text-center text-xs  py-1 px-2 bg-black  rounded-md'>Featured</p> */}
                     {

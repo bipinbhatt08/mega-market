@@ -79,7 +79,7 @@ export default function Products({ params }) {
 
                 </div>
               </div>
-              <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src={product.imageUrl}/>
+              <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src={"http://localhost:5000/productImgs/"+product.productImage} />
             </div>
           </div>
         </section>

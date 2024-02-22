@@ -91,7 +91,7 @@ export default function Cart() {
                     return (
                       <div className="lg:flex lg:items-center lg:justify-between border-b border-b-gray-300 py-2 ">
                           <div className="flex items-center lg:w-1/5  ">
-                            <img src={product.imageUrl} alt="image" width={50} height={50} className=''/>
+                            <img src={"http://localhost:5000/productImgs/"+product.productImage}  alt="image" width={50} height={50} className=''/>
                             <p className='ml-3'>{product.title} </p>
                           </div>
                           <div className=' flex items-center justify-between  border-1  border-gray-400 p-2 text-gray-500 rounded  'style={{width:"100px"}}>

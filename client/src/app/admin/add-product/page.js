@@ -96,14 +96,14 @@ export default function AddProduct() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const handleAddProduct=async(values)=>{
     const formData = new FormData()
-    formData.append('productImage',uploadImageRef?.current?.files[0])
-    //file append garne ho
-    console.log(formData)
-    debugger
+    const file = uploadImageRef?.current?.files[0]
+    console.log(file.name)
+    formData.append('productImage',file)
+    
+    
     for(let item in values){
       formData.append(item,values[item])
     }
-    console.log(formData)
     
     const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products`,{
         method: 'POST',
@@ -233,7 +233,7 @@ export default function AddProduct() {
                   isRequired/>
             </div>
             <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
-              <input
+              <Input
                   type="file" 
                   name="productImage"
                   variant="bordered"
