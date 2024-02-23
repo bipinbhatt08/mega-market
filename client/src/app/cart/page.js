@@ -4,12 +4,16 @@ import Section from '@/components/sectionLayout/page'
 import BreadCrumb from "@/components/breadcrumb/page"
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import {  removeFromCart } from '@/redux/reducerSlice/cartSlice';
+import {  addToCheckoutProductDetails, removeFromCart } from '@/redux/reducerSlice/cartSlice';
 import { FaPlus,FaMinus } from "react-icons/fa6";
+import { Button } from '@nextui-org/react';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 
 
 export default function Cart() {
+  const router = useRouter()
   const dispatch = useDispatch()
   const {products} = useSelector(state=>state.cart)
 
@@ -67,6 +71,27 @@ export default function Cart() {
       return updatedTotalPrice;
     });
   }
+  const handleProceedToCheckout=()=>{
+
+    if(grandTotal===0){
+      return toast.warning("There must be items in the cart to proceed")
+    }
+    const updatedProducts ={}
+    for (let product in products) {
+      for (let id in qty) {
+        if (id === product) {
+          updatedProducts[product] = {
+            ...products[product],
+            orderedQuantity: qty[id]
+          }
+        }
+      }
+    }
+    const checkoutProductDetails = {products:updatedProducts,grandTotal}
+    dispatch(addToCheckoutProductDetails(checkoutProductDetails))
+    router.push('/checkout')
+  }
+
   return (
     <>
         <Layout>
@@ -130,7 +155,7 @@ export default function Cart() {
                       <p className='font-semibold  text-red-500 '>Rs. {grandTotal}</p>
                     </div>
                      <div className="flex itmes-center justify-center mt-4">
-                     <button className='mx-auto text-red-500 border border-red-500 py-2 px-3 rounded hover:bg-red-500 hover:text-white transition'>Proceed to checout</button>
+                     <Button onClick={handleProceedToCheckout}className='mx-auto text-red-500 border border-red-500 bg-white py-2 px-3 rounded hover:bg-red-500 hover:text-white transition'>Proceed to checkout</Button>
                      </div>
                     </div>
                 </div>
