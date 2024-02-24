@@ -12,8 +12,6 @@ import { useRouter } from 'next/router'
 
 const Form =(props)=>{
   const handleAddCategory=async(values)=>{
-    
-    
     const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,{
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -22,11 +20,11 @@ const Form =(props)=>{
         const data = await res.json()
         if(res.status!==200){
            toast.warning(data.message)
-          
           return
           
         }
         toast.success(data.message)
+        props.setIsCategoryAdded(!props.isCategoryAdded)
        props.onClose()
         
 
@@ -76,14 +74,13 @@ const Form =(props)=>{
   </div>
   ) 
 }
-const FormModal =({onClose,isOpen,onOpenChange})=>{
-  return  <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+const FormModal =({onClose,isOpen,onOpenChange,setIsCategoryAdded,isCategoryAdded})=>{
+  return  <Modal isOpen={isOpen} onOpenChange={onOpenChange} >
   <ModalContent>
     {(onClose) => (
       <>
-        
         <ModalBody>
-          <Form onClose={onClose}/>
+          <Form onClose={onClose} setIsCategoryAdded={setIsCategoryAdded} isCategoryAdded={isCategoryAdded}/>
         </ModalBody>
       </>
     )}
@@ -94,6 +91,8 @@ export default function AddProduct() {
   const [categories,setCategories]=useState()
   const uploadImageRef = useRef(null)
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const [isCategoryAdded,setIsCategoryAdded]=useState(false)
+
   const handleAddProduct=async(values)=>{
     const formData = new FormData()
     const file = uploadImageRef?.current?.files[0]
@@ -147,7 +146,7 @@ export default function AddProduct() {
 
   useEffect(()=>{
      fetchCategories()
-  },[])
+  },[isCategoryAdded])
   return (
     <>
         <Layout>
@@ -240,7 +239,7 @@ export default function AddProduct() {
                   size="sm"  
                   radius="sm" 
           
-                  className="mb-3 border"  
+                  className="mb-3 "  
                   ref={uploadImageRef}
                   />
             </div>
@@ -269,7 +268,7 @@ export default function AddProduct() {
             <Button  variant="flat" onPress={onOpen}    className=" ml-3 text-red-500 border border-red-500 bg-white mb-3 rounded-md  hover:bg-red-50 " >
               Add new
             </Button>
-            <FormModal isOpen={isOpen} onOpenChange={onOpenChange}/>
+            <FormModal isOpen={isOpen} onOpenChange={onOpenChange} setIsCategoryAdded={setIsCategoryAdded} isCategoryAdded={isCategoryAdded}/>
             </div>
             <div className='w-full px-2 py-1'>
             <Button  variant="flat"   type="submit"  className="signUpBtn  mb-3 rounded-md  " >
