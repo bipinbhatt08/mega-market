@@ -31,6 +31,11 @@ const productSchem = new Schema({
       quantity:{
         type:Number,
         required: true
+      },
+      addedBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User",
+        required:true
       }
 })
 

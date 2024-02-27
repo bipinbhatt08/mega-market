@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import {Navbar, NavbarBrand,Tooltip,Badge,Input, NavbarContent, NavbarItem, Button, NavbarMenuToggle,NavbarMenu,NavbarMenuItem,DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
+import {Navbar, NavbarBrand,Tooltip,Badge,Input, NavbarContent, NavbarItem, Button, NavbarMenuToggle,NavbarMenu,NavbarMenuItem,DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, button, link} from "@nextui-org/react";
 import { color } from "framer-motion";
 import Link from 'next/link'
 import { useSelector, useDispatch} from "react-redux";
@@ -84,6 +84,12 @@ export default function App() {
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{userDetails.email}</p>
+            </DropdownItem>
+            <DropdownItem key="cart"  as={Link} href="/cart">
+              Cart
+            </DropdownItem>
+            <DropdownItem key="orders" as={Link} href="/orders">
+              Orders
             </DropdownItem>
             <DropdownItem key="logout" color="danger" onClick={handleLogout}>
               Log Out

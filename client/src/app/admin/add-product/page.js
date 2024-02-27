@@ -8,6 +8,7 @@ import { useFormik } from 'formik';
 import { toast } from 'react-toastify'
 import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter} from "@nextui-org/react";
 import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
 
 
 const Form =(props)=>{
@@ -92,12 +93,14 @@ export default function AddProduct() {
   const uploadImageRef = useRef(null)
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [isCategoryAdded,setIsCategoryAdded]=useState(false)
+  const {userDetails} = useSelector(state=>state.user)
 
   const handleAddProduct=async(values)=>{
     const formData = new FormData()
     const file = uploadImageRef?.current?.files[0]
     console.log(file.name)
     formData.append('productImage',file)
+    formData.append('addedBy',userDetails._id)
     
     
     for(let item in values){

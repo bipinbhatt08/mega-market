@@ -34,7 +34,7 @@ export default function Checkout() {
       
     }
     toast.success(data.message)
-    router.push("/products")
+    router.push("/orders")
     dispatch(clearCartState())
     
     }

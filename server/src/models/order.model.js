@@ -29,6 +29,11 @@ const orderSchema = new Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:true
+    },
+    status: {
+        type: String,
+        enum: ['Pending', 'Processing', 'Shipped', 'Delivered'],
+        default: 'Pending'
     }
     
 })
