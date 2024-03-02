@@ -59,3 +59,20 @@ exports.getSingleProduct = async(req,res)=>{
         console.log("ERROR",error)
     }
 }
+exports.getProductOfAdmin= async(req,res)=>{
+    try {
+        const {addedBy} = req.query
+        const products = await Product.find({addedBy}).populate('category')
+        if(products.length===0){
+            return res.status(403).json({
+                message:"No products found"
+            })
+        }
+        res.status(200).json({
+            message:"Product fetched succesfully",
+            products
+        })
+    } catch (error) {
+        console.log("Internal Server Error:",error)
+    }
+}

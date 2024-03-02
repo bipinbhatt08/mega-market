@@ -183,7 +183,7 @@ const Step = (props) => {
   );
 };
 
-export default function Cart() {
+export default function Order() {
 
  
   const {userDetails} = useSelector(state=>state.user)

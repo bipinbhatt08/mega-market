@@ -7,9 +7,9 @@ import React,{useEffect, useRef, useState} from 'react';
 import { useFormik } from 'formik';
 import { toast } from 'react-toastify'
 import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter} from "@nextui-org/react";
-import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux'
 
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/navigation'
 
 const Form =(props)=>{
   const handleAddCategory=async(values)=>{
@@ -94,7 +94,7 @@ export default function AddProduct() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [isCategoryAdded,setIsCategoryAdded]=useState(false)
   const {userDetails} = useSelector(state=>state.user)
-
+const router = useRouter()
   const handleAddProduct=async(values)=>{
     const formData = new FormData()
     const file = uploadImageRef?.current?.files[0]
@@ -117,6 +117,7 @@ export default function AddProduct() {
           
         }
         toast.success(data.message)
+        router.push('/admin/dashboard')
   }
 
   const formik = useFormik({
@@ -152,8 +153,6 @@ export default function AddProduct() {
   },[isCategoryAdded])
   return (
     <>
-        <Layout>
-          <BreadCrumb page="Add Product" />
           <Section heading="Add Product" subHeading="Add a new product" bg="bg-gray-100">
           <div className='mt-5'>
           <form onSubmit={formik.handleSubmit} className=" lg:px-11 md:px-8 px-5 border-gray-500 rounded-md py-8 container mx-auto bg-white flex flex-wrap ">
@@ -281,7 +280,6 @@ export default function AddProduct() {
           </form>
           </div>
           </Section>
-        </Layout>
     </>
   )
 }

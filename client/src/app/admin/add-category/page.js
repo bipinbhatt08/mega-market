@@ -24,7 +24,7 @@ export default function AddProduct() {
           
         }
         toast.success(data.message)
-        router.push("/admin/add-product")
+        router.push("/admin/dashboard")
 
   }
 
@@ -42,8 +42,7 @@ export default function AddProduct() {
   
   return (
     <>
-        <Layout>
-          <BreadCrumb page="Add Category" />
+        
           <Section heading="Add Category" subHeading="Add a new category" bg="bg-gray-100">
           <div className='mt-5'>
           <form onSubmit={formik.handleSubmit} className=" lg:px-11 md:px-8 px-5 border-gray-500 rounded-md py-8 container mx-auto bg-white flex flex-wrap ">
@@ -72,7 +71,6 @@ export default function AddProduct() {
           </form>
           </div>
           </Section>
-        </Layout>
     </>
   )
 }

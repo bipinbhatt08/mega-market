@@ -39,6 +39,8 @@ export default function Login() {
       }
       dispatch(addUserDetail(data))
       toast.success(data.message)
+      console.log(data)
+      if(data.userDetails.role==="admin") return router.push('/admin/dashboard')
       router.push('/')
 
   }
