@@ -23,7 +23,7 @@ const page = (props) => {
   }
   return (
     <>
-      <div className="px-4 pb-4 lg:w-1/3 ">
+      <div className="px-4 pb-4 lg:w-1/3 md:w-1/2 w-full">
        
         <div className=" bg-white border product-card  bg-opacity-75 px-2 rounded-lg  overflow-hidden  relative">
         
