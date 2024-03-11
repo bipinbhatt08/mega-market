@@ -13,7 +13,7 @@ import { MdPayments } from "react-icons/md";
 
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { FaShippingFast } from "react-icons/fa";
-import { Layout, Menu, Button, theme, Table, Steps } from 'antd';
+import { Layout, Menu, Button, theme, Table, Steps, Pagination } from 'antd';
 import { Avatar, Badge, DropdownItem, DropdownMenu,Dropdown,DropdownTrigger } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
@@ -29,6 +29,8 @@ const App = () => {
   const {isLoggedIn,userDetails}= useSelector(state=>state.user)
   const [products,setProducts]=useState([])
   const [orders,setOrders] = useState([])
+  const [orderCount,setOrderCount]=useState()
+  const [pageCount,setPageCount]=useState(1)
   const [users,setUsers] = useState([])
   const [collapsed, setCollapsed] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState('4'); 
@@ -65,7 +67,7 @@ const App = () => {
     setUsers(data.users)
   }
   const fetchOrders = async()=>{
-  const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders`,{
+  const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders?page=${pageCount}`,{
     method: 'GET',
     headers: {'Content-Type': 'application/json'}
     })
@@ -75,6 +77,7 @@ const App = () => {
       return 
     }
     setOrders(data.orders)
+    setOrderCount(data.orderCount)
   }
   const DisplayProducts = ({products}) =>{
     const columns = [
@@ -250,7 +253,7 @@ const App = () => {
     )
   }
 
-    const ShowDataTable = ({orders,handleViewDetail}) =>{
+    const ShowDataTable = ({orders,handleViewDetail,pageCount}) =>{
       const columns = [
         {
           title: 'SN',
@@ -305,7 +308,8 @@ const App = () => {
         // }
         const obj = {
           key:order._id,
-          sn: id+1,
+          // sn: pageCount *5 -5+  +id+1,
+          sn:pageCount*5+id-4,
           receiverName: order.receiverDetails.firstName +" "+ order.receiverDetails.lastName ,    
           receiverContact: order.receiverDetails.phoneNo,
           status:order.status,
@@ -326,7 +330,8 @@ const App = () => {
   
     return (
       <>
-         <ShowDataTable orders={orders} handleViewDetail={handleViewDetail}/>
+         <ShowDataTable orders={orders} handleViewDetail={handleViewDetail} pageCount={pageCount}/>
+         <Pagination defaultCurrent={pageCount} total={orderCount} onChange={(e)=>setPageCount(e)} pageSize={5}/>
           {isOrderDetailDivOpen?<OrderDetailsContainer order={orderProps} />:null}
       </>
     )
@@ -367,7 +372,7 @@ const App = () => {
   }
   useEffect(()=>{
     fetchProducts()
-    fetchOrders()
+    // fetchOrders()
     fetchUsers()
     socket.on("connection")
     socket.on('newOrder', (data) => {
@@ -376,6 +381,9 @@ const App = () => {
       // setNotificationCount(notificationCount+1)
   });
   },[])
+  useEffect(()=>{
+    fetchOrders()
+  },[pageCount])
   
   if(!isLoggedIn)return router.push("/login")
   return (

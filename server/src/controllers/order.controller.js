@@ -33,15 +33,17 @@ exports.getMyOrders =async(req,res)=>{
 }
 exports.getAllOrders =async(req,res)=>{
     try {
-        const orders = await Order.find().populate('orderedBy')
+        const {page} = req.query
+        const orderList = await Order.find()
+        const orders = await Order.find().populate('orderedBy').limit(5).skip(page*5-5)
         if(orders.length===0){
             return res.status(404).json({
                 message:"No orders found"
-    
             })
         }
         res.status(200).json({
             message:"Order feteched successfully.",
+            orderCount:orderList.length,
             orders
         })
        
