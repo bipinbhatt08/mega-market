@@ -1,5 +1,19 @@
 const express = require('express')
 const app = express()
+const http = require('http');
+const server = http.createServer(app);
+
+const { Server } = require("socket.io");
+const io = new Server(server,{
+  cors: {
+    origin: "*"
+  }
+})
+module.exports.io = io;
+io.on('connection', (socket) => {
+  console.log('a user connected');
+})
+
 const cors = require('cors')
 app.use(cors())
 //dotenv
@@ -19,10 +33,13 @@ const userRoute = require('./routes/user.route.js')
 const productRoute = require('./routes/product.route.js')
 const categoryRoute = require('./routes/category.route.js')
 const orderRoute = require('./routes/order.route.js')
+const notificationRoute = require('./routes/notification.route.js')
 app.use('',userRoute)
 app.use('',productRoute)
 app.use('',categoryRoute)
 app.use('',orderRoute)
-app.listen(port, () => {
+app.use('',notificationRoute)
+
+server.listen(port, () => {
   console.log(`Ecommerce  app listening on port ${port}`)
 })

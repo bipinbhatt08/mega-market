@@ -21,6 +21,8 @@ import { logout } from '@/redux/reducerSlice/userSlice';
 import { useRouter } from 'next/navigation';
 const { Header, Sider, Content } = Layout;
 
+
+import { socket } from '@/socket';
 const App = () => {
 
   const router = useRouter()
@@ -30,6 +32,8 @@ const App = () => {
   const [users,setUsers] = useState([])
   const [collapsed, setCollapsed] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState('4'); 
+  const [notificationCount,setNotificationCount]=useState(0)
+  const [n,setN]=useState()
   const dispatch = useDispatch()
 
   const {
@@ -365,7 +369,14 @@ const App = () => {
     fetchProducts()
     fetchOrders()
     fetchUsers()
+    socket.on("connection")
+    socket.on('newOrder', (data) => {
+      console.log('New order received:', data);
+      setN(data.message)
+      // setNotificationCount(notificationCount+1)
+  });
   },[])
+  
   if(!isLoggedIn)return router.push("/login")
   return (
   <div>
@@ -376,34 +387,46 @@ const App = () => {
         </div>
         <h2 className="text-white text-lg font-semibold ml-5">Hello  <span className='text-danger'>{userDetails.username}</span>!, Welcome </h2>
         <div className="flex justify-between items-center gap-5 "> 
-          <Badge content="0" shape="circle" color="danger" size="md">
-            <IoMdNotifications size={30} color="white" className="cursor-pointer" onClick={() => alert('Clicked')} />
-          </Badge>
           <Dropdown placement="bottom-">
-          <DropdownTrigger>
-            <Avatar
-              isBordered
-              as="button"
-              className="transition-transform"
-              color="danger"
-              name="Jason Hughes"
-              size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-            />
-           
-          </DropdownTrigger>
-          <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
-              <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">{userDetails.email}</p>
-            </DropdownItem>
-            <DropdownItem key="logout" color="danger" onClick={handleLogout}>
-              Log Out
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-       
-          
+            <DropdownTrigger>
+            <div className='p-0 m-0  flex items-center '>
+            <Badge content={notificationCount.toString()} shape="circle" color="danger" size="md">
+            <IoMdNotifications size={30} color="white" className="cursor-pointer"  />
+            </Badge>
+            </div>
+            </DropdownTrigger>
+            
+            <DropdownMenu aria-label="Profile Actions" variant="flat" 
+                onAction={(key) => alert(key)}>
+              <DropdownItem key="profile" className="h-14 gap-2">
+                <p className="font-semibold">{n}</p>
+              </DropdownItem>
+            </DropdownMenu>
+
+          </Dropdown>
+            <Dropdown placement="bottom-">
+            <DropdownTrigger>
+              <Avatar
+                isBordered
+                as="button"
+                className="transition-transform"
+                color="danger"
+                name="Jason Hughes"
+                size="sm"
+                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              />
+            
+            </DropdownTrigger>
+            <DropdownMenu aria-label="Profile Actions" variant="flat">
+              <DropdownItem key="profile" className="h-14 gap-2">
+                <p className="font-semibold">Signed in as</p>
+                <p className="font-semibold">{userDetails.email}</p>
+              </DropdownItem>
+              <DropdownItem key="logout" color="danger" onClick={handleLogout}>
+                Log Out
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </div>
       </Header>
       <Layout>

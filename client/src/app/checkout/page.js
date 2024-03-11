@@ -33,6 +33,7 @@ export default function Checkout() {
       return toast.warning(data.message)
       
     }
+    // sendNotification()
     toast.success(data.message)
     router.push("/orders")
     dispatch(clearCartState())
@@ -61,6 +62,7 @@ export default function Checkout() {
     const payload = {receiverDetails,paymentMethod,orderNotes,products,totalPrice,shippingAddress,orderedBy}
     // console.log(payload)
     createOrder(payload)
+    
     },
     });
 

@@ -1,11 +1,13 @@
-const { default: mongoose } = require("mongoose")
+const { io } = require('../index.js');
 const Order = require("../models/order.model")
 exports.createOrder=async(req,res)=>{
     try {
         await Order.create(req.body)
+        io.emit('newOrder', { message: 'New order created!' });
         res.status(200).json({
             message:"Order placed successfully."
         })
+    
     } catch (error) {
         console.log("ERROR",error)
     }
@@ -42,6 +44,7 @@ exports.getAllOrders =async(req,res)=>{
             message:"Order feteched successfully.",
             orders
         })
+       
     } catch (error) {
         console.log("ERROR",error)
     }
