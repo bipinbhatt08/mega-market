@@ -41,7 +41,7 @@ const page = (props) => {
             </div>
 
             <div className="p-2 border-t ">
-                <p className="text-red-500 text-sm pt-1 ">{props.productDetails.category.name.toUpperCase()}</p>
+                <p className="text-red-500 text-sm pt-1 ">{props.productDetails.category?.name.toUpperCase()}</p>
                 <div className="py-1">
                     <Link href={`/products/${productDetails._id}`}><h1 className='font-semibold text-gray-800 hover:text-red-500 transition duration-400 mt-1'>{props.productDetails.title}</h1></Link>
 

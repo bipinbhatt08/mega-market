@@ -1,7 +1,5 @@
 'use client'
-import Layout from '@/components/layout/page'
-import Section from '@/components/sectionLayout/page'
-import BreadCrumb from "@/components/breadcrumb/page"
+
 import { Input, Button,Select, SelectItem,Textarea, useDisclosure} from "@nextui-org/react"
 import React,{useEffect, useRef, useState} from 'react';
 import { useFormik } from 'formik';
@@ -88,26 +86,26 @@ const FormModal =({onClose,isOpen,onOpenChange,setIsCategoryAdded,isCategoryAdde
   </ModalContent>
 </Modal>
 }
-export default function AddProduct() {
+export default function EditProduct({productId,onClose,productEdited,setProductEdited}) {
   const [categories,setCategories]=useState()
   const uploadImageRef = useRef(null)
+  const [product,setProduct]=useState({})
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [isCategoryAdded,setIsCategoryAdded]=useState(false)
   const {userDetails} = useSelector(state=>state.user)
   const router = useRouter()
-  const handleAddProduct=async(values)=>{
+
+  const handleEdit=async(values)=>{
     const formData = new FormData()
     const file = uploadImageRef?.current?.files[0]
     formData.append('productImage',file)
     formData.append('addedBy',userDetails._id)
-    
-    
     for(let item in values){
       formData.append(item,values[item])
     }
     
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products`,{
-        method: 'POST',
+    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`,{
+        method: 'PATCH',
         body: formData
         })
         const data = await res.json()
@@ -116,21 +114,26 @@ export default function AddProduct() {
           
         }
         toast.success(data.message)
-        router.push('/admin/dashboard')
-  }
+        fetchProduct()
+        onClose()
+        setProductEdited(!productEdited)
 
+        router.push('/admin/dashboard')
+
+  }
+  
   const formik = useFormik({
     initialValues: {
-      title: '',
-      description: '',
-      price: '',
-      discount: '',
-      category: '',
-      quantity:''
+      title: "",
+      description:"" ,
+      price: "",
+      discount: "",
+      category:"",
+      quantity:""
     },
     // validationSchema,
     onSubmit: values => {
-    handleAddProduct(values)
+    handleEdit(values)
     },
     });
   const fetchCategories = async()=>{
@@ -143,17 +146,41 @@ export default function AddProduct() {
       if(res.status!==200){
         return toast.warning(data.message)
       }
-      setCategories(data.categories)
-       
+      setCategories(data.categories) 
   }
+  const fetchProduct = async()=>{
+    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`,{
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'}
+      })
+       const data = await res.json()
+       
+      if(res.status!==200){
+        return toast.warning(data.message)
+      }
+      setProduct(data.product) 
+  }
+  useEffect(() => {
+    formik.setValues({
+      title: product.title || "",
+      description: product.description || "",
+      price: product.price || "",
+      discount: product.discount || "",
+      category: product.category|| "",
+      quantity: product.quantity || ""
+    });
+  }, [product]);
+  useEffect(()=>{
+    fetchProduct()
+  },[])
 
   useEffect(()=>{
      fetchCategories()
+     
   },[isCategoryAdded])
   return (
     <>
-          <Section heading="Add Product" subHeading="Add a new product" bg="bg-gray-100">
-          <div className='mt-5'>
+         
           <form onSubmit={formik.handleSubmit} className=" lg:px-11 md:px-8 px-5 border-gray-500 rounded-md py-8 container mx-auto bg-white flex flex-wrap ">
           <h2 className=" text-xl  font-semibold text-center mb-1 color-black p-3">All fields are required</h2>
             <div className=' w-full px-2 py-1'>
@@ -254,6 +281,7 @@ export default function AddProduct() {
                 label="Category"
                 name='category'
                 variant='bordered'
+                value={formik.values.category}
                 onChange={formik.handleChange}
               >
                 {categories && categories.length > 0 ? (
@@ -273,12 +301,10 @@ export default function AddProduct() {
             </div>
             <div className='w-full px-2 py-1'>
             <Button  variant="flat"   type="submit"  className="signUpBtn  mb-3 rounded-md  " >
-              Add Product
+              Save
             </Button>
             </div>
           </form>
-          </div>
-          </Section>
     </>
   )
 }

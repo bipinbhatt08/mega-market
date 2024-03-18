@@ -2,8 +2,8 @@
 const { Table,  } = require("antd")
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 import { toast } from "react-toastify";
-
-const DisplayProducts = ({products}) =>{
+import AddProduct from "@/components/editProduct/page";
+const DisplayProducts = ({products,productEdited,setProductEdited}) =>{
   const handleDelete=async(id,onClose)=>{
     const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${id}`,{
       method: 'DELETE',
@@ -15,11 +15,12 @@ const DisplayProducts = ({products}) =>{
         
       }
       toast.success(data.message)
+      setProductEdited(!productEdited)
       onClose()
   }
+  
   const DeleteModal=({productId,handleDelete})=> {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  
     return (
       <>
         <Button onPress={onOpen} className="signUpBtn">Delete</Button>
@@ -46,6 +47,22 @@ const DisplayProducts = ({products}) =>{
               </>
             )}
           </ModalContent>
+        </Modal>
+      </>
+    );
+  }
+  const EditModal=({productId,setProductEdited,productEdited})=> {
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    return (
+      <>
+        <Button onPress={onOpen} className="loginBtn mr-3">Edit</Button>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="2xl">
+          <ModalContent>
+          {(onClose) => (
+            <AddProduct productId={productId} onClose={onClose} setProductEdited={setProductEdited} productEdited={productEdited}/>
+            )}
+          </ModalContent>
+          
         </Modal>
       </>
     );
@@ -107,7 +124,7 @@ const DisplayProducts = ({products}) =>{
         discount:product.discount,
         category:product.category,
         sale:'40',
-        action :  <><Button onClick={()=>alert("order")} className='mr-3'>Edit</Button><DeleteModal productId={product._id} handleDelete={handleDelete}/></>,
+        action :  <><EditModal productId={product._id}  productEdited={productEdited} setProductEdited={setProductEdited} className='mr-3'>Edit</EditModal><DeleteModal productId={product._id} handleDelete={handleDelete}/></>,
       }
       return obj
     })

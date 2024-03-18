@@ -27,6 +27,7 @@ const App = () => {
   const router = useRouter()
   const {isLoggedIn,userDetails}= useSelector(state=>state.user)
   const [products,setProducts]=useState([])
+  const [productEdited,setProductEdited]=useState(false)
   const [orders,setOrders] = useState([])
   const [orderCount,setOrderCount]=useState()
   const [pageCount,setPageCount]=useState(1)
@@ -89,7 +90,7 @@ const App = () => {
           Analytics
           </div>
       case '2':
-        return <><DisplayProducts products={products} /></>
+        return <><DisplayProducts products={products} productEdited={productEdited} setProductEdited={setProductEdited} /></>
       case '3':
         return <div>Categories Content</div>
       case '4':
@@ -121,6 +122,9 @@ const App = () => {
     fetchOrders()
   },[pageCount])
   
+  useEffect(()=>{
+    fetchProducts()
+  },[productEdited])
   if(!isLoggedIn)return router.push("/login")
   return (
   <div>

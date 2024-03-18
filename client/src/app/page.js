@@ -6,8 +6,14 @@ import ProductCard from '@/components/productCard/page'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
 export default function Home() {
+  const router = useRouter()
+  const {isLoggedIn,userDetails}= useSelector(state=>state.user)
   const [products,setProducts]=useState([])
+  if(isLoggedIn && userDetails.role==='admin') return router.push("admin/dashboard") 
+
   const fetchProducts = async()=>{
     const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products`,{
         method: 'GET',
@@ -24,7 +30,6 @@ export default function Home() {
     
     fetchProducts()
   }, [])
-
   return (
     
     <>

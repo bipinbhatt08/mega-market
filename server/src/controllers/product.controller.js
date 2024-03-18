@@ -97,3 +97,37 @@ exports.deleteProduct = async(req,res)=>{
         console.log("ERROR",error)
     }
 }
+exports.editProduct=async(req,res)=>{
+    try {
+        const {id}=req.params
+        const { title, price, description, discount, category, quantity, addedBy } = req.body;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid product ID' });
+          }
+        let product = await Product.findById(id)
+        if(!product){
+           return res.status(404).json({
+                message:"No Product Found"
+            })
+        }
+       
+        product.title = title;
+        product.price = price;
+        product.description = description;
+        product.discount = discount;
+        product.category = category;
+        product.quantity = quantity;
+        // Update product image if available
+
+        if (req.file && req.file.filename) {
+            product.productImage = req.file.filename;
+        }
+        await product.save();
+        res.status(200).json({
+            message:"Product Edited succesfully",
+        })
+    } catch (error) {
+        console.log("ERROR",error)
+    }
+}
