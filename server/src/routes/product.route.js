@@ -19,11 +19,11 @@ var storage = multer.diskStorage({
   
 const upload = multer({ storage: storage })
 
-const { addProduct, getAllProducts, getSingleProduct, getProductOfAdmin } = require('../controllers/product.controller')
+const { addProduct, getAllProducts, getSingleProduct, getProductOfAdmin, deleteProduct } = require('../controllers/product.controller')
 
 
 router.route('/products').post(upload.single('productImage'),addProduct).get(getAllProducts)
 
-router.route('/products/:id').get(getSingleProduct)
+router.route('/products/:id').get(getSingleProduct).delete(deleteProduct)
 router.route('/admin/products').get(getProductOfAdmin)
 module.exports = router

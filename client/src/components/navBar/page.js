@@ -8,9 +8,10 @@ import { FaCartPlus , FaHeart,} from "react-icons/fa";
 import { CiSearch} from "react-icons/ci";
 import { logout } from "@/redux/reducerSlice/userSlice";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function App() {
-
+  const router = useRouter()
   const {isLoggedIn,userDetails}= useSelector(state=>state.user)
   const {products}= useSelector(state=>state.cart)
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -34,6 +35,7 @@ export default function App() {
         // toast.warning("hello")
         
         dispatch(logout())
+        router.push('/login')
       }
       return <>
        

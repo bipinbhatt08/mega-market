@@ -76,3 +76,24 @@ exports.getProductOfAdmin= async(req,res)=>{
         console.log("Internal Server Error:",error)
     }
 }
+
+exports.deleteProduct = async(req,res)=>{
+    try {
+        const {id}=req.params
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid product ID' });
+          }
+        const product = await Product.findById(id).populate('category')
+        if(!product){
+           return res.status(404).json({
+                message:"No Product Found"
+            })
+        }
+        await Product.findByIdAndDelete(id)
+        res.status(200).json({
+            message:"Product Deleted succesfully",
+        })
+    } catch (error) {
+        console.log("ERROR",error)
+    }
+}
