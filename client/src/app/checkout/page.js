@@ -21,7 +21,33 @@ export default function Checkout() {
   const {products,grandTotal} = checkoutProductDetails
 
   const arrProducts = products==null?null:Object.values(products)
+  const handlePayement=(order)=>{
+    if(order.paymentMethod==='khalti'){
+      return handleKhalti(order)
+    }
+    
+  }
+  const handleKhalti= async(order)=>{
+    const {totalPrice,_id}= order
+    const amount = totalPrice *100
+    const purchase_order_id = _id
+    const purchase_order_name = order.orderedBy.username
+    const website_url = 'http://localhost:3000'
+    const return_url =  'http://localhost:3000/'
+    const values = {amount,purchase_order_id,purchase_order_name,website_url,return_url}
+    const res = await fetch(`https://a.khalti.com/api/v2/epayment/initiate/`,{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Key e07c985c103346e4b25e8d5e6502dcb3'
+    },
+    body: JSON.stringify(values)
+    })
+    const responseData = await res.json();
+    router.push(responseData.payment_url)
+  }
 
+  
   const createOrder = async(values)=>{
     const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders`,{
     method: 'POST',
@@ -34,9 +60,10 @@ export default function Checkout() {
       
     }
     // sendNotification()
+    handlePayement(data.order)
     toast.success(data.message)
-    router.push("/orders")
     dispatch(clearCartState())
+    router.push("/orders")
     
     }
 

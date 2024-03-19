@@ -2,10 +2,11 @@ const { io } = require('../index.js');
 const Order = require("../models/order.model")
 exports.createOrder=async(req,res)=>{
     try {
-        await Order.create(req.body)
+        const order= await (await Order.create(req.body)).populate("orderedBy")
         io.emit('newOrder', { message: 'New order created!' });
         res.status(200).json({
-            message:"Order placed successfully."
+            message:"Order placed successfully.",
+            order
         })
     
     } catch (error) {
