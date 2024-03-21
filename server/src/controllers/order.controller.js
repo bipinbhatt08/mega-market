@@ -32,6 +32,24 @@ exports.getMyOrders =async(req,res)=>{
         console.log("ERROR",error)
     }
 }
+exports.getSingleOrder =async(req,res)=>{
+    try {
+        const orderId = req.params.id
+        const order = await Order.findById(orderId)
+        if(!order){
+            return res.status(404).json({
+                message:"Invalid order id"
+    
+            })
+        }
+        res.status(200).json({
+            message:"Order feteched successfully.",
+            order
+        })
+    } catch (error) {
+        console.log("ERROR",error)
+    }
+}
 exports.getAllOrders =async(req,res)=>{
     try {
         const {page} = req.query
