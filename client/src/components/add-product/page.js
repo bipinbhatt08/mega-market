@@ -1,5 +1,4 @@
 'use client'
-import Section from '@/components/sectionLayout/page'
 import { Input, Button,Select, SelectItem,Textarea, useDisclosure} from "@nextui-org/react"
 import React,{useEffect, useRef, useState} from 'react';
 import { useFormik } from 'formik';
@@ -145,10 +144,10 @@ export default function AddProduct() {
   },[isCategoryAdded])
   return (
     <>
-          <Section heading="Add Product" subHeading="Add a new product" bg="bg-gray-100">
-          <div className='mt-5'>
-          <form onSubmit={formik.handleSubmit} className=" lg:px-11 md:px-8 px-5 border-gray-500 rounded-md py-8 container mx-auto bg-white flex flex-wrap ">
-          <h2 className=" text-xl  font-semibold text-center mb-1 color-black p-3">All fields are required</h2>
+          
+          <form onSubmit={formik.handleSubmit} className=" px-5 border-gray-500 rounded-md pt-5 pb-5 container mx-auto bg-white flex flex-wrap ">
+          <h2 className=" text-xl  font-semibold text-center   text-red-500 px-2">Add Product</h2>
+            <p className="w-full px-2 mt-0 mb-3 ">(all fields are required)</p>
             <div className=' w-full px-2 py-1'>
 
             <Input 
@@ -259,19 +258,17 @@ export default function AddProduct() {
                 <SelectItem isDisabled>No items</SelectItem>
   )}
             </Select>
-            <Button  variant="flat" onPress={onOpen}    className=" ml-3 text-red-500 border border-red-500 bg-white mb-3 rounded-md  hover:bg-red-50 " >
-              Add new
+            <Button  variant="flat" onPress={onOpen}    className=" px-5 ml-3 text-red-500 border border-red-500 bg-white mb-3 rounded-md  hover:bg-red-50 " >
+              Add new category
             </Button>
             <FormModal isOpen={isOpen} onOpenChange={onOpenChange} setIsCategoryAdded={setIsCategoryAdded} isCategoryAdded={isCategoryAdded}/>
             </div>
-            <div className='w-full px-2 py-1'>
-            <Button  variant="flat"   type="submit"  className="signUpBtn  mb-3 rounded-md  " >
+            <div className='w-full px-2'>
+            <Button  variant="flat"   type="submit"  className="signUpBtn rounded-md mt-3  " >
               Add Product
             </Button>
             </div>
           </form>
-          </div>
-          </Section>
     </>
   )
 }

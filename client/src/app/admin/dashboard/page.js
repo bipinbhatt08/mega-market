@@ -12,10 +12,9 @@ import { LiaUsersSolid } from "react-icons/lia";
 import { MdPayments } from "react-icons/md";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { FaShippingFast } from "react-icons/fa";
-import { Layout, Menu, Button, theme, Table, Steps, Pagination } from 'antd';
+import { Layout, Menu, Button, theme, } from 'antd';
 import { Avatar, Badge, DropdownItem, DropdownMenu,Dropdown,DropdownTrigger } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
-import Link from 'next/link';
 import { logout } from '@/redux/reducerSlice/userSlice';
 import { useRouter } from 'next/navigation';
 import DisplayOrders from '@/components/displayOrders/page'
@@ -23,6 +22,64 @@ import DisplayProducts from '@/components/displayProducts/page'
 import { socket } from '@/socket';
 import axios from 'axios';
 const { Header, Sider, Content } = Layout;
+
+import {Modal, ModalContent,  useDisclosure,} from "@nextui-org/react";
+import AddProduct from '../../../components/add-product/page';
+import AddCategory from '@/components/add-category/page';
+
+
+ function AddProductModal() {
+  const {isOpen, onOpen,onClose} = useDisclosure();
+
+  return (
+    <>
+      <Button onClick={onOpen} color="primary" className='mr-4'>Add Product</Button>
+      <Modal 
+        isOpen={isOpen} 
+        size='2xl'
+        scrollBehavior='inside'
+        onClose={onClose}
+        placement="top-center"
+        backdrop={'blur'}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+             <AddProduct/>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+ function AddCategoryModal() {
+  const {isOpen, onOpen,onClose} = useDisclosure();
+
+  return (
+    <>
+      <Button onClick={onOpen} color="primary">Add Category</Button>
+      <Modal 
+        isOpen={isOpen} 
+        size='2xl'
+        scrollBehavior='inside'
+        onClose={onClose}
+        placement="top-center"
+        backdrop={'blur'}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+             <AddCategory/>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+
+
 const App = () => {
 
   const router = useRouter()
@@ -207,7 +264,7 @@ const App = () => {
           </Menu>
         </Sider>
         <Layout className="  ">
-          <Header style={{ padding: 0, background: 'white' }}>
+          <Header style={{ padding: 0, background: 'white'}}>
             <Button
               type="text"
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -218,9 +275,10 @@ const App = () => {
                 height: 64,
               }}
             />
+            <AddProductModal/>
+            <AddCategoryModal />
             
-            <Button onClick={()=>router.push("/admin/add-product")}>Add Product</Button>
-            <Button onClick={()=>router.push("/admin/add-category")} className='ml-3'>Add Category</Button>
+            
           </Header>
           <Content
             style={{

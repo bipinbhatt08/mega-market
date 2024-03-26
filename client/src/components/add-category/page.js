@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 
-export default function AddProduct() {
+export default function AddCategory() {
   const router = useRouter()
   const handleAddCategory=async(values)=>{
     
@@ -39,11 +39,12 @@ export default function AddProduct() {
   return (
     <>
         
-          <Section heading="Add Category" subHeading="Add a new category" bg="bg-gray-100">
-          <div className='mt-5'>
+          
+         
           <form onSubmit={formik.handleSubmit} className=" lg:px-11 md:px-8 px-5 border-gray-500 rounded-md py-8 container mx-auto bg-white flex flex-wrap ">
-          <h2 className=" text-xl  font-semibold text-center mb-1 color-black p-3">All fields are required</h2>
-            <div className=' w-full px-2 py-1'>
+          <h2 className=" text-xl  font-semibold text-center   text-red-500 px-2">Add Category</h2>
+            <p className="w-full px-2 mt-0 mb-3 ">(all fields are required)</p>  
+          <div className=' w-full px-2 py-1'>
 
             <Input 
                   type="text" 
@@ -65,8 +66,6 @@ export default function AddProduct() {
             </Button>
             </div>
           </form>
-          </div>
-          </Section>
     </>
   )
 }

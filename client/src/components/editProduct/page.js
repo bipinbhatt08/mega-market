@@ -183,8 +183,9 @@ export default function EditProduct({productId,onClose,productEdited,setProductE
     <>
          
           <form onSubmit={formik.handleSubmit} className=" lg:px-11 md:px-8 px-5 border-gray-500 rounded-md py-8 container mx-auto bg-white flex flex-wrap ">
-          <h2 className=" text-xl  font-semibold text-center mb-1 color-black p-3">All fields are required</h2>
-            <div className=' w-full px-2 py-1'>
+          <h2 className=" text-xl  font-semibold text-center   text-red-500 px-2">Edit Product</h2>
+            <p className="w-full px-2 mt-0 mb-3 ">(all fields are required)</p>        
+                <div className=' w-full px-2 py-1'>
 
             <Input 
                   type="text" 
@@ -301,9 +302,10 @@ export default function EditProduct({productId,onClose,productEdited,setProductE
             <FormModal isOpen={isOpen} onOpenChange={onOpenChange} setIsCategoryAdded={setIsCategoryAdded} isCategoryAdded={isCategoryAdded}/>
             </div>
             <div className='w-full px-2 py-1'>
-            <Button  variant="flat"   type="submit"  className="signUpBtn  mb-3 rounded-md  " >
+            <Button  variant="flat"   type="submit"   className="signUpBtn rounded-md mt-3 " >
               Save
             </Button>
+           
             </div>
           </form>
     </>

@@ -56,8 +56,14 @@ const DisplayProducts = ({products,productEdited,setProductEdited}) =>{
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     return (
       <>
-        <Button onPress={onOpen} className="loginBtn mr-3">Edit</Button>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="2xl">
+        <Button 
+        onPress={onOpen} className="loginBtn mr-3"
+        >Edit</Button>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="2xl"
+        
+        scrollBehavior='inside'
+        placement="top-center"
+        backdrop={'blur'}>
           <ModalContent>
           {(onClose) => (
             <AddProduct productId={productId} onClose={onClose} setProductEdited={setProductEdited} productEdited={productEdited}/>
