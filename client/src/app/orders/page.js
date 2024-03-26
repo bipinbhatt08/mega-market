@@ -7,9 +7,8 @@ import { Button } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
-import { Steps, Table,ConfigProvider } from 'antd';
+import { Table,ConfigProvider } from 'antd';
 import Link from 'next/link';
-import axios from 'axios';
 
 const OrderDetailsContainer = ({order}) => {
   const arrProducts = Object.values(order.products)
@@ -150,57 +149,25 @@ const ShowDataTable = ({orders,handleViewDetail}) =>{
 
 }
 
-const Step = (props) => {
-  const orderStatus = ['Pending', 'Processing', 'Shipped', 'Delivered']
-  const [current, setCurrent] = useState(orderStatus.indexOf(props.order.status));
-  
-  return (
-    <>
-      <Steps
-        current={current}
-        size='Default'
-        items={[
-          {
-            title: 'Pending',
-            description:"Order is waiting for confirmation",
-          },
-          {
-            title: 'Processing',
-            description:"Order is being prepared for shipment.",
-          },
-          {
-            title: 'Shipped',
-            description:"Order has been dispatched for delivery",
-          },
-          {
-            title: 'Delivered',
-            description:"Order has been successfully delivered",
-          },
-        ]}
-      />
 
-      
-    </>
-  );
-};
 
 export default function Order() {
 
- 
+ const router = useRouter()
   const {userDetails} = useSelector(state=>state.user)
   const [orders,setOrders] = useState([])
   const [isOrderDetailDivOpen,setIsOrderDetailDivOpen]= useState(false)
   const[orderProps,setOrderProps]=useState({})
 
   const fetechOrders = async()=>{
-        const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders/${userDetails._id}`,{
-         
+        const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders/${userDetails._id}`,{
+          method: 'GET',
           headers: {'Content-Type': 'application/json'}
           })
-           const data = res.data
+           const data = await res.json()
            
           if(res.status!==200){
-            return toast.warning(data.message)
+            return 
           }
           setOrders(data.orders)
       }
@@ -209,8 +176,7 @@ export default function Order() {
     fetechOrders()
   },[])
   const  handleViewDetail =(order)=>{
-    setIsOrderDetailDivOpen(!isOrderDetailDivOpen)
-    setOrderProps(order)
+    router.push(`/orders/${order._id}`)
   } 
 
   return (
