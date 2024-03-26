@@ -1,5 +1,5 @@
 'use client'
-import { Steps } from "antd"
+import { ConfigProvider, Steps } from "antd"
 import Link from "next/link"
 import { toast } from "react-toastify"
 import Layout from "@/components/layout/page"
@@ -13,28 +13,39 @@ const SingleOrder = ({params}) => {
         
         return (
           <>
-            <Steps
-              current={current}
-              size='Default'
-              items={[
-                {
-                  title: 'Pending',
-                  description:"Order is waiting for confirmation",
-                },
-                {
-                  title: 'Processing',
-                  description:"Order is being prepared for shipment.",
-                },
-                {
-                  title: 'Shipped',
-                  description:"Order has been dispatched for delivery",
-                },
-                {
-                  title: 'Delivered',
-                  description:"Order has been successfully delivered",
-                },
-              ]}
-            />
+          <ConfigProvider
+                theme={{
+                  token: {
+                    // Seed Token
+                    colorPrimary: 'rgb(255,90,95)',
+                  },
+                }}
+              >
+                 <Steps
+            
+            current={current}
+            size='Default'
+            items={[
+              {
+                title: 'Pending',
+                description:"Order is waiting for confirmation",
+              },
+              {
+                title: 'Processing',
+                description:"Order is being prepared for shipment.",
+              },
+              {
+                title: 'Shipped',
+                description:"Order has been dispatched for delivery",
+              },
+              {
+                title: 'Delivered',
+                description:"Order has been successfully delivered",
+              },
+            ]}
+          />
+              </ConfigProvider> 
+           
       
             
           </>
@@ -50,7 +61,7 @@ const SingleOrder = ({params}) => {
            const data = await res.json()
            
           if(res.status!==200){
-            return toast.warning(data.message)
+            return 
           }
           setOrder(data.order)
           console.log(data.order)
@@ -69,26 +80,25 @@ const SingleOrder = ({params}) => {
         <h1 className='text-lg font-semibold mt-5 mb-3 underline'>Order Id : {order._id}</h1>
   
         <div className="flex items-center justify-between gap-5 ">
-        <div className="flex flex-col flex-wrap ">
-          <p ><span className="font-semibold">Total Type Of Products:</span> {Object.keys(order.products).length}</p>
-          <p ><span className="font-semibold">Total Cost:  </span> Rs.{order.totalPrice}</p>
-          <p ><span className="font-semibold">Payment Method: </span> {order.paymentMethod} </p>
-          <p ><span className="font-semibold">Receiver Name: </span> {order.receiverDetails.firstName +" "+ order.receiverDetails.lastName }</p>
-          <p ><span className="font-semibold">Shipping Address: </span>{order.shippingAddress.streetAddress+", "+ order.shippingAddress.city + ", " + order.shippingAddress.state  + ", "+order.shippingAddress.country }</p>
-        </div>
-        <div className="border border-gray-300 rounded-lg shadow-md p-5 bg-yellow-200">
-        <h2 className="text-xl font-semibold text-red-500 mb-3">Order Notes</h2>
-        <p className="text-gray-700">{order.orderNotes}</p>
-      </div>
-      
+            <div className="flex flex-col flex-wrap ">
+                <p ><span className="font-semibold">Total Type Of Products:</span> {Object.keys(order.products).length}</p>
+                <p ><span className="font-semibold">Total Cost:  </span> Rs.{order.totalPrice}</p>
+                <p ><span className="font-semibold">Payment Method: </span> {order.paymentMethod} </p>
+                <p ><span className="font-semibold">Receiver Name: </span> {order.receiverDetails.firstName +" "+ order.receiverDetails.lastName }</p>
+                <p ><span className="font-semibold">Shipping Address: </span>{order.shippingAddress.streetAddress+", "+ order.shippingAddress.city + ", " + order.shippingAddress.state  + ", "+order.shippingAddress.country }</p>
+            </div>
+            <div className="border border-gray-300 rounded-lg shadow-md p-5 bg-yellow-200 w-1/3 ">
+                <h2 className="text-xl font-semibold text-red-500 mb-3">Order Notes</h2>
+                <p className="text-gray-700">{order.orderNotes}</p>
+            </div>
         </div>
         <div class="lg:flex   my-5 bg-white rounded">
                   <div class="lg:w-full lg:pr-4  ">
                     <div className="lg:flex items-center justify-between border-b-2 pb-2  border-b-gray-300 hidden ">
-                            <p className='font-semibold  text-gray-500  w-1/3'>Product</p>
-                            <p className='font-semibold  text-gray-500 '>Quantity</p>
-                            <p className='font-semibold  text-gray-500 '>Rate</p>
-                            <p className='font-semibold  text-gray-500'>Total</p>
+                            <p className='font-semibold  text-red-500  w-1/3'>Product</p>
+                            <p className='font-semibold  text-red-500 '>Quantity</p>
+                            <p className='font-semibold  text-red-500 '>Rate</p>
+                            <p className='font-semibold  text-red-500'>Total</p>
                     </div>
                     {arrProducts.length==0 && 
                     
