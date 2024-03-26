@@ -2,10 +2,11 @@ const { io } = require('../index.js');
 const Order = require("../models/order.model")
 exports.createOrder=async(req,res)=>{
     try {
-        await Order.create(req.body)
+        const order= await (await Order.create(req.body)).populate("orderedBy")
         io.emit('newOrder', { message: 'New order created!' });
         res.status(200).json({
-            message:"Order placed successfully."
+            message:"Order placed successfully.",
+            order
         })
     
     } catch (error) {
@@ -26,6 +27,24 @@ exports.getMyOrders =async(req,res)=>{
         res.status(200).json({
             message:"Order feteched successfully.",
             orders
+        })
+    } catch (error) {
+        console.log("ERROR",error)
+    }
+}
+exports.getSingleOrder =async(req,res)=>{
+    try {
+        const orderId = req.params.id
+        const order = await Order.findById(orderId)
+        if(!order){
+            return res.status(404).json({
+                message:"Invalid order id"
+    
+            })
+        }
+        res.status(200).json({
+            message:"Order feteched successfully.",
+            order
         })
     } catch (error) {
         console.log("ERROR",error)
