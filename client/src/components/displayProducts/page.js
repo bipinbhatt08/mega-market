@@ -3,13 +3,14 @@ const { Table,  } = require("antd")
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 import { toast } from "react-toastify";
 import AddProduct from "@/components/editProduct/page";
+import axios from "axios";
 const DisplayProducts = ({products,productEdited,setProductEdited}) =>{
   const handleDelete=async(id,onClose)=>{
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${id}`,{
-      method: 'DELETE',
+    const res = await axios.delete(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${id}`,{
+      
       headers: {'Content-Type': 'application/json'},
       })
-      const data = await res.json()
+      const data = res.data
       if(res.status!==200){
         return toast.warning(data.message)
         

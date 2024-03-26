@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 export default function Home() {
   const router = useRouter()
   const {isLoggedIn,userDetails}= useSelector(state=>state.user)
@@ -15,17 +16,16 @@ export default function Home() {
   if(isLoggedIn && userDetails.role==='admin') return router.push("admin/dashboard") 
 
   const fetchProducts = async()=>{
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products`,{
-        method: 'GET',
+    const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products`,{
         headers: {'Content-Type': 'application/json'}
         })
-         const data = await res.json()
+         const data = res.data
          
         if(res.status!==200){
           return toast.warning(data.message)
         }
         setProducts(data.products)
-}
+} 
   useEffect(() => {
     
     fetchProducts()

@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux'
 import { addUserDetail } from '@/redux/reducerSlice/userSlice'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 
 export default function Login() {
@@ -27,12 +28,11 @@ export default function Login() {
   });
 
   const handleLogin=async(values)=>{
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/login`,{
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(values)
+    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/login`,values,{
+      
+      headers: {'Content-Type': 'application/json'}
       })
-      const data = await res.json()
+      const data = res.data
       if(res.status!==200){
         toast.warning(data.message)
         return

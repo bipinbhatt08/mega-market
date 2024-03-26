@@ -1,7 +1,5 @@
 'use client'
-import Layout from '@/components/layout/page'
 import Section from '@/components/sectionLayout/page'
-import BreadCrumb from "@/components/breadcrumb/page"
 import { Input, Button,Select, SelectItem,Textarea, useDisclosure} from "@nextui-org/react"
 import React,{useEffect, useRef, useState} from 'react';
 import { useFormik } from 'formik';
@@ -10,15 +8,14 @@ import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter} from
 
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 const Form =(props)=>{
   const handleAddCategory=async(values)=>{
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,{
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(values)
+    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,values,{
+      headers: {'Content-Type': 'application/json'}
       })
-        const data = await res.json()
+        const data = res.data
         if(res.status!==200){
            toast.warning(data.message)
           return
@@ -27,8 +24,7 @@ const Form =(props)=>{
         toast.success(data.message)
         props.setIsCategoryAdded(!props.isCategoryAdded)
        props.onClose()
-        
-
+      
   }
 
   const formik = useFormik({
@@ -100,20 +96,18 @@ export default function AddProduct() {
     const file = uploadImageRef?.current?.files[0]
     formData.append('productImage',file)
     formData.append('addedBy',userDetails._id)
-    
-    
     for(let item in values){
       formData.append(item,values[item])
     }
     
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products`,{
-        method: 'POST',
-        body: formData
+    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products`,formData,{
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }
         })
-        const data = await res.json()
+        const data = res.data
         if(res.status!==200){
           return toast.warning(data.message)
-          
         }
         toast.success(data.message)
         router.push('/admin/dashboard')
@@ -134,11 +128,10 @@ export default function AddProduct() {
     },
     });
   const fetchCategories = async()=>{
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,{
-      method: 'GET',
+    const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,{
       headers: {'Content-Type': 'application/json'}
       })
-       const data = await res.json()
+       const data = res.data
        
       if(res.status!==200){
         return toast.warning(data.message)

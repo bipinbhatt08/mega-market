@@ -1,24 +1,20 @@
 'use client'
-import Layout from '@/components/layout/page'
 import Section from '@/components/sectionLayout/page'
-import BreadCrumb from "@/components/breadcrumb/page"
 import { Input, Button,Select, SelectItem,Textarea} from "@nextui-org/react"
 import React,{useEffect, useRef, useState} from 'react';
 import { useFormik } from 'formik';
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 export default function AddProduct() {
   const router = useRouter()
   const handleAddCategory=async(values)=>{
     
-    
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,{
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(values)
+    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,values,{
+      headers: {'Content-Type': 'application/json'}
       })
-        const data = await res.json()
+        const data = res.data
         if(res.status!==200){
           return toast.warning(data.message)
           

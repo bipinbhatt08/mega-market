@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { Steps, Table,ConfigProvider } from 'antd';
 import Link from 'next/link';
+import axios from 'axios';
 
 const OrderDetailsContainer = ({order}) => {
   const arrProducts = Object.values(order.products)
@@ -192,11 +193,11 @@ export default function Order() {
   const[orderProps,setOrderProps]=useState({})
 
   const fetechOrders = async()=>{
-        const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders/${userDetails._id}`,{
-          method: 'GET',
+        const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders/${userDetails._id}`,{
+         
           headers: {'Content-Type': 'application/json'}
           })
-           const data = await res.json()
+           const data = res.data
            
           if(res.status!==200){
             return toast.warning(data.message)

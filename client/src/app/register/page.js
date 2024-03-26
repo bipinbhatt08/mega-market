@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 export default function Login() {
   const router = useRouter()
@@ -27,12 +28,11 @@ export default function Login() {
   
   const handleRegister = async(values)=>{
       
-      const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/register`,{
-      method: 'POST',
+      const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/register`,values,{
+     
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(values)
       })
-      const data = await res.json()
+      const data = res.data
       if(res.status!==200){
         return toast.warning(data.message)
         

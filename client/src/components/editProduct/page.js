@@ -8,15 +8,15 @@ import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter} from
 
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
+import axios from "axios";
 
 const Form =(props)=>{
   const handleAddCategory=async(values)=>{
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,{
-      method: 'POST',
+    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,values,{
+     
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(values)
       })
-        const data = await res.json()
+        const data = res.data
         if(res.status!==200){
            toast.warning(data.message)
           return
@@ -104,11 +104,13 @@ export default function EditProduct({productId,onClose,productEdited,setProductE
       formData.append(item,values[item])
     }
     
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`,{
-        method: 'PATCH',
-        body: formData
+    const res = await axios.patch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`,formData,{
+        
+      headers: {
+      'Content-Type': 'multipart/form-data', 
+    }
         })
-        const data = await res.json()
+        const data = res.data
         if(res.status!==200){
           return toast.warning(data.message)
           
@@ -137,11 +139,10 @@ export default function EditProduct({productId,onClose,productEdited,setProductE
     },
     });
   const fetchCategories = async()=>{
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,{
-      method: 'GET',
+    const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,{
       headers: {'Content-Type': 'application/json'}
       })
-       const data = await res.json()
+       const data = res.data
        
       if(res.status!==200){
         return toast.warning(data.message)
@@ -149,11 +150,11 @@ export default function EditProduct({productId,onClose,productEdited,setProductE
       setCategories(data.categories) 
   }
   const fetchProduct = async()=>{
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`,{
-      method: 'GET',
+    const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`,{
+      
       headers: {'Content-Type': 'application/json'}
       })
-       const data = await res.json()
+       const data = res.data
        
       if(res.status!==200){
         return toast.warning(data.message)

@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 import { addToCart } from '@/redux/reducerSlice/cartSlice'
 import { useRouter } from "next/navigation"
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 
 export default function Products({ params }) {
@@ -19,11 +20,11 @@ export default function Products({ params }) {
   const discountedPrice = product.dicount!==0?(product.price*(100-product.discount)*0.01).toFixed(2):product.price
 
   const fetchProduct = async()=>{
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${params.id}`,{
-        method: 'GET',
+    const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${params.id}`,{
+        
         headers: {'Content-Type': 'application/json'}
         })
-         const data = await res.json()
+         const data = res.data
          if(res.status!==200){
           return toast.warning(data.message)
           

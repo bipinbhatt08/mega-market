@@ -21,6 +21,7 @@ import { useRouter } from 'next/navigation';
 import DisplayOrders from '@/components/displayOrders/page'
 import DisplayProducts from '@/components/displayProducts/page'
 import { socket } from '@/socket';
+import axios from 'axios';
 const { Header, Sider, Content } = Layout;
 const App = () => {
 
@@ -43,23 +44,20 @@ const App = () => {
   } = theme.useToken();
 
   const fetchProducts = async()=>{
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/admin/products?addedBy=${userDetails._id}`,{
-        method: 'GET',
+    const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/admin/products?addedBy=${userDetails._id}`,{
         headers: {'Content-Type': 'application/json'}
         })
-         const data = await res.json()
-         
+         const data = res.data
         if(res.status!==200){
           return 
         }
        setProducts(data.products)
   }
   const fetchUsers = async()=>{
-  const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/users`,{
-    method: 'GET',
+  const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/users`,{
     headers: {'Content-Type': 'application/json'}
     })
-     const data = await res.json()
+     const data = res.data
      
     if(res.status!==200){
       return 
@@ -67,11 +65,10 @@ const App = () => {
     setUsers(data.users)
   }
   const fetchOrders = async()=>{
-  const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders?page=${pageCount}`,{
-    method: 'GET',
+  const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders?page=${pageCount}`,{
     headers: {'Content-Type': 'application/json'}
     })
-     const data = await res.json()
+     const data = res.data
      
     if(res.status!==200){
       return 

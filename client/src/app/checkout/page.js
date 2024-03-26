@@ -10,6 +10,7 @@ import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { clearCartState } from '@/redux/reducerSlice/cartSlice';
+import axios from 'axios';
 
 
 export default function Checkout() {
@@ -23,12 +24,10 @@ export default function Checkout() {
   const arrProducts = products==null?null:Object.values(products)
 
   const createOrder = async(values)=>{
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders`,{
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(values)
+    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders`,values,{
+    headers: {'Content-Type': 'application/json'}
     })
-    const data = await res.json()
+    const data = res.data
     if(res.status!==200){
       return toast.warning(data.message)
       
