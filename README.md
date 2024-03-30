@@ -34,12 +34,7 @@ In Phase 2, we aim to enhance the shopping experience by adding more advanced fe
 - **User Management**: Allow users to manage their profiles, view purchase history, and update account settings.
 - **Forgot Password**: Users can reset their passwords if they forget them.
 - **Product Management**: Admin privileges to perform CRUD operations on products.
-- **Payment Integration**: Integration with Stripe payment gateway for secure transactions.
+- **Payment Integration**: Integration with Khalti payment gateway for secure transactions.
 - **Purchase History**: Users can view their past orders and track purchase history.
 - **Wish List**: Users can add products to their wishlist for future purchase or reference.
 -  **Order Tracking**: Users can track the status of their orders in real-time.
-
-  
-
-
-- **Payment Integration**: Integration with Stripe payment gateway for secure transactions.
