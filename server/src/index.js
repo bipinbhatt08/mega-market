@@ -34,11 +34,13 @@ const productRoute = require('./routes/product.route.js')
 const categoryRoute = require('./routes/category.route.js')
 const orderRoute = require('./routes/order.route.js')
 const notificationRoute = require('./routes/notification.route.js')
+const khaltiRoute = require('./routes/khalti.route.js')
 app.use('',userRoute)
 app.use('',productRoute)
 app.use('',categoryRoute)
 app.use('',orderRoute)
 app.use('',notificationRoute)
+app.use('',khaltiRoute)
 
 server.listen(port, () => {
   console.log(`Ecommerce  app listening on port ${port}`)

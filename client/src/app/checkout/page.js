@@ -32,20 +32,16 @@ export default function Checkout() {
     const {totalPrice,_id}= order
     const amount = totalPrice *100
     const purchase_order_id = _id
-    const purchase_order_name = order.orderedBy.username
-    const website_url = 'http://localhost:3000'
-    const return_url =  'http://localhost:3000/'
-    const values = {amount,purchase_order_id,purchase_order_name,website_url,return_url}
-    const res = await fetch(`https://a.khalti.com/api/v2/epayment/initiate/`,{
-    method: 'POST',
+    const purchase_order_name = "MEGA-ORDER"+ _id
+    const values = {amount,purchase_order_id,purchase_order_name}
+    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/payment/khalti/initiate`,values,{
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Key e07c985c103346e4b25e8d5e6502dcb3'
-    },
-    body: JSON.stringify(values)
+    }
     })
-    const responseData = await res.json();
-    router.push(responseData.payment_url)
+    if(res.status==200){
+      window.location.href = res.data.responseUrl
+    }
   }
 
   
