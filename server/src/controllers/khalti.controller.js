@@ -20,3 +20,21 @@ exports.initiatePayment = async(req,res)=>{
         console.log("error:",error)
     }
 }
+
+exports.verifyPidx = async(req,res)=>{
+    try {
+        const {pidx} = req.body
+        const response =  await axios.post("https://a.khalti.com/api/v2/epayment/lookup/",{pidx },{
+        headers : {
+            'Authorization': `Key ${process.env.KHALTI_PAYMENT_LIVE_SECRET_KEY}`
+        }
+       })
+       if(response.data.status == 'Completed'){
+            res.status(200).json({
+                message:"Payment verified successfully",
+            })
+       }
+    } catch (error) {
+        console.log("ERROR:",error.message)
+    }
+}
