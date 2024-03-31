@@ -38,7 +38,6 @@ export default function App() {
         router.push('/login')
       }
       return <>
-       
        <NavbarItem className="hidden lg:flex">
         <Badge content={noOfitemsInCart} shape="circle" color="danger" >
         <Tooltip showArrow={true} color="danger" content="Cart">
@@ -87,12 +86,15 @@ export default function App() {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{userDetails.email}</p>
             </DropdownItem>
-            <DropdownItem key="cart"  as={Link} href="/cart">
+            {userDetails.role=='admin'?<DropdownItem key="dashboard" as={Link} href="/admin/dashboard">
+              Go to Dashboard
+            </DropdownItem>:<><DropdownItem key="cart"  as={Link} href="/cart">
               Cart
             </DropdownItem>
             <DropdownItem key="orders" as={Link} href="/orders">
               Orders
-            </DropdownItem>
+            </DropdownItem></>}
+
             <DropdownItem key="logout" color="danger" onClick={handleLogout}>
               Log Out
             </DropdownItem>
