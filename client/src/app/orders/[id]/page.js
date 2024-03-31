@@ -4,6 +4,7 @@ import Link from "next/link"
 import { toast } from "react-toastify"
 import Layout from "@/components/layout/page"
 import BreadCrumb from "@/components/breadcrumb/page"
+import axios from "axios"
 const { useState, useEffect } = require("react")
 
 const SingleOrder = ({params}) => {
@@ -54,11 +55,11 @@ const SingleOrder = ({params}) => {
       
     const [order,setOrder] = useState()
     const fetechOrder = async()=>{
-        const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders/${params.id}`,{
-          method: 'GET',
+        const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders/${params.id}`,{
+          
           headers: {'Content-Type': 'application/json'}
           })
-           const data = await res.json()
+           const data = res.data
            
           if(res.status!==200){
             return 

@@ -6,17 +6,20 @@ import { IoMdCheckmark } from "react-icons/io";
 import { useRouter } from 'next/navigation';
 
 const KhaltiSuccess = () => {
-    const router = useRouter()
-    const { pidx } = router.query
-    alert(pidx)
+    const router = useRouter();
+    const urlParams = new URLSearchParams(window.location.search);
+const pidx = urlParams.get('pidx');
+  
+    useEffect(() => {
+        console.log(router.query)
+        // rest of your code
+    }, [])
 
      const [loading,setLoading] = useState(true)
-     setTimeout(()=>{
-        setLoading(!loading)
-     },2000)
+    
     const verifyPidx = async()=>{
       try {
-        const response = await axios.post("/payment/khalti/verify",{pidx})
+        const response = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/payment/khalti/verify`,{pidx})
         if(response.status === 200){
             setLoading(false)
             router.push('/orders')
@@ -27,12 +30,13 @@ const KhaltiSuccess = () => {
     }
     useEffect(()=>{
         verifyPidx()
-    },[])
+    },[pidx])
     if(loading){
         return (
+            
             <div className="min-h-screen flex items-center justify-center">
                   <Spinner label="Payment Verifying..." color="secondary"  labelColor="secondary" size='lg' />
-        </div>
+            </div>
 
             )
     }else{

@@ -50,7 +50,9 @@ const page = (props) => {
 
 
                     <p className='py-1 text-red-500 font-semibold '> Rs <span className="">{(productDetails.price*(100-productDetails.discount)*0.01).toFixed(2)}</span>/-</p>
-                    <p className='text-sm'>{props.productDetails.description}</p>
+                    <p className='text-sm'>{                    props.productDetails?.description.length > 87 ? props.productDetails?.description.substring(0, 87) + "....." : props.productDetails?.description
+}</p>
+
                 </div>
                 <div className="border-t flex  justify-between items-center pt-3  w-full ">
                     <CiHeart color='red' size={28} className='cursor-pointer border border-red-500 rounded hover:bg-red-100  hover:text-white ' />
