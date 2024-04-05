@@ -160,6 +160,7 @@ const App = () => {
   const handleLogout =()=>{
     // toast.warning("hello")
     dispatch(logout())
+    router.push('/login')
   }
   useEffect(()=>{
     fetchProducts()

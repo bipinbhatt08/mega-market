@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 export default function App() {
   const router = useRouter()
   const {isLoggedIn,userDetails}= useSelector(state=>state.user)
+  console.log(userDetails.role)
   const {products}= useSelector(state=>state.cart)
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const dispatch = useDispatch()
@@ -86,20 +87,20 @@ export default function App() {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{userDetails.email}</p>
             </DropdownItem>
-            {userDetails.role=='admin'?<DropdownItem key="dashboard" as={Link} href="/admin/dashboard">
-              Go to Dashboard
-            </DropdownItem>:<><DropdownItem key="cart"  as={Link} href="/cart">
-              Cart
-            </DropdownItem>
-            <DropdownItem key="orders" as={Link} href="/orders">
-              Orders
-            </DropdownItem></>}
-
+            
+              <DropdownItem key="cart"  as={Link} href="/cart">
+                Cart
+              </DropdownItem>
+              <DropdownItem key="orders" as={Link} href="/orders">
+                Orders
+              </DropdownItem>
             <DropdownItem key="logout" color="danger" onClick={handleLogout}>
               Log Out
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
+
+        
       </>
     }
     const AuthButtons = ()=>{
@@ -117,7 +118,45 @@ export default function App() {
         </NavbarItem>
       </>
     }
+    const AdminAvatarDropDown = ()=>{
 
+      const handleLogout =()=>{
+        // toast.warning("hello")
+        
+        dispatch(logout())
+        router.push('/login')
+      }
+      return <>
+      <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <Avatar
+              isBordered
+              as="button"
+              className="transition-transform"
+              color="danger"
+              name="Jason Hughes"
+              size="sm"
+              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+            />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Profile Actions" variant="flat">
+            <DropdownItem key="profile" className="h-14 gap-2">
+              <p className="font-semibold">Signed in as</p>
+              <p className="font-semibold">{userDetails.email}</p>
+            </DropdownItem>
+            
+              <DropdownItem key="cart"  as={Link} href="/admin/dashboard">
+                Dashboard
+              </DropdownItem>
+            <DropdownItem key="logout" color="danger" onClick={handleLogout}>
+              Log Out
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+
+        
+      </>
+    }
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} isBordered shouldHideOnScroll >
       <NavbarContent justify="start">
@@ -172,7 +211,7 @@ export default function App() {
           type="search"
         />
       </NavbarItem>
-        {(!isLoggedIn)?<AuthButtons/>:<UserAvatarDropDown/>
+        {(!isLoggedIn)?<AuthButtons/>: (userDetails.role=='user')?<UserAvatarDropDown/>:<AdminAvatarDropDown/>
         }
       </NavbarContent>
       <NavbarMenu>

@@ -10,29 +10,30 @@ export const metadata = {
   title: 'Mega Market',
   description: 'An Ecommerce platform',
 }
-
+import ProtectRoutes from '@/components/auth/protectRoutes/page'
 export default function RootLayout({ children }) {
   return (
     <html lang="en" >
       <body className={inter.className}>
         <ReduxProvider>
-        <Providers>
-        <ToastContainer
-          position="top-right"
-          autoClose={800}
-          hideProgressBar={false}
-          newestOnTop={true}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          pauseOnHover
-          theme="light"
-          />
-        {children}
-
-        </Providers>
+          <Providers>
+            <ProtectRoutes>
+              <ToastContainer
+                position="top-right"
+                autoClose={800}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                pauseOnHover
+                theme="light"
+                />
+                  {children}
+            </ProtectRoutes>
+          </Providers>
         </ReduxProvider>
-        </body>
+      </body>
     </html>
   )
 }
