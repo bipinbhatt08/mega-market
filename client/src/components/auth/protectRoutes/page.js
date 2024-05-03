@@ -7,9 +7,8 @@ const SecureRoutes = ({ children }) => {
   const { userDetails } = useSelector(state => state.user);
 
   const adminRoutes = ['/admin/dashboard','/login','/']; // Remove 'login'
-  const publicRoutes = ['/', '/login', '/register', '/products'];
-  const userRoutes = ['/orders', '/cart', '/checkout', '/success', ...publicRoutes];
-
+  const publicRoutes = ['/', '/login', '/register', '/products','/products/[id]','/category'];
+  const userRoutes = ['/orders', '/cart', '/orders/[id]','/checkout', '/success', ...publicRoutes];
   const currentPage = usePathname();
   console.log("CURRENPAGE", currentPage);
 
@@ -22,14 +21,14 @@ const SecureRoutes = ({ children }) => {
     }
   }
   if(userDetails.role ==='user'){
-    if(userRoutes.includes(currentPage)){
+    if(userRoutes.includes(currentPage)|| currentPage.startsWith("/products/")|| currentPage.startsWith("/orders/")){
       return children
     }
     else{
       return <NotFound/>
     }
   }
-  if(publicRoutes.includes(currentPage)){
+  if(publicRoutes.includes(currentPage)|| currentPage.startsWith("/products/")){
     return children
   }else{
     return <NotFound/>

@@ -225,7 +225,7 @@ export default function Checkout() {
                   
                 </div> 
                 <div className="lg:w-1/3 p-3 mt-4 lg:mt-0 border border-gray-300 border-2 border-dashed rounded">
-                    <h1 className='font-semibold text-lg text-gray-500 border-b-2 mb-4 pb-2 pt-3'>Your order</h1>
+                    <h1 className='font-semibold text-lg text-gray-500 border-b-2 mb-4 pb-2 pt-3'>Order summary</h1>
                     <div className="flex items-center justify-between py-2 border-b">
                       <p className='font-semibold  text-gray-500 '>Products </p>
                       <p className='font-semibold  text-gray-500 '>Quantity</p>
@@ -236,7 +236,7 @@ export default function Checkout() {
                         <div className="lg:flex lg:items-center lg:justify-between  py-2 ">
                             <div className="flex items-center lg:w-1/3  ">
                               <img src={"http://localhost:5000/productImgs/"+product.productImage}  alt="image" width={50} height={50} className=''/>
-                              <p className='ml-3'>{product.title} </p>
+                              <Link href={`/products/${product._id}`}><p className='ml-3 hover:text-red-500'>{product.title}</p></Link> 
                             </div>
                             <p className='  text-gray-500 '>{product.orderedQuantity}</p> 
                             <p className='  text-gray-500'>{product.orderedQuantity*product.discountedPrice}</p> 
@@ -264,7 +264,6 @@ export default function Checkout() {
                           isRequired="true"
                         >
                           <Radio value="cod">Cash on delivery</Radio>
-                          <Radio value="esewa">E-sewa</Radio>
                           <Radio value="khalti">Khalti</Radio>
                         </RadioGroup>
                     </div>
