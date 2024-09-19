@@ -6,11 +6,11 @@ import NotFound from "@/app/404";
 const SecureRoutes = ({ children }) => {
   const { userDetails } = useSelector(state => state.user);
 
-  const adminRoutes = ['/admin/dashboard','/login','/']; // Remove 'login'
+  const adminRoutes = ['/admin/dashboard','/login','/products']; // Remove 'login'
   const publicRoutes = ['/', '/login', '/register', '/products','/products/[id]','/category'];
   const userRoutes = ['/orders', '/cart', '/orders/[id]','/checkout', '/success', ...publicRoutes];
   const currentPage = usePathname();
-  console.log("CURRENPAGE", currentPage);
+  console.log("CURRENTPAGE", currentPage);
 
   if(userDetails.role === 'admin'){
     if(adminRoutes.includes(currentPage)){

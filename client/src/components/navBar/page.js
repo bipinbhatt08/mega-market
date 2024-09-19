@@ -158,7 +158,7 @@ export default function App() {
       </>
     }
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered shouldHideOnScroll >
+    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered shouldHideOnScroll maxWidth="full" >
       <NavbarContent justify="start">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
