@@ -7,7 +7,14 @@ exports.addCategory=async(req,res)=>{
             message:"Category already exists"
         })
     }
-    await Category.create(req.body)
+
+    const {name} = req.body
+    const categoryImage= req.file?.filename 
+    await Category.create({
+            name,
+            categoryImage
+           
+        })
     res.status(200).json({
         message:"Category added successfully"
     })

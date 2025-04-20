@@ -166,8 +166,8 @@ export default function App() {
         />
         <Link href={'/'}>
           <NavbarBrand >
-            <img src="/gharJaggaLogo.png" alt="" height={75} width={75} />
-            <p className="font-bold text-inherit hidden lg:flex md:flex">MEGA<span style={{color: "rgb(255,90,95)"}}>MARKET</span></p>
+            {/* <img src="/ACL.png" alt="gharJaggaLogo.svg" width={60} className="rounded-full"/> */}
+            <p className="font-bold text-inherit hidden lg:flex md:flex ml-2">AAYUSHA<span style={{color: "rgb(255,90,95)"}}>COLLECTION</span></p> 
           </NavbarBrand>
         </Link>
      

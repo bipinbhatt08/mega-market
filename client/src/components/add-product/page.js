@@ -90,6 +90,7 @@ export default function AddProduct() {
   const [isCategoryAdded,setIsCategoryAdded]=useState(false)
   const {userDetails} = useSelector(state=>state.user)
   const router = useRouter()
+  
   const handleAddProduct=async(values)=>{
     const formData = new FormData()
     const file = uploadImageRef?.current?.files[0]
