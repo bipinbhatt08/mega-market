@@ -18,7 +18,7 @@ export default function AddCategory() {
     const formData = new FormData();
     formData.append('categoryImage', selectedFile);
     formData.append('name', values.name);
-    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,formData,{
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/categories`,formData,{
       headers: {'Content-Type': 'multipart/form-data'}
       })
         const data = res.data
@@ -51,10 +51,10 @@ export default function AddCategory() {
         
           
          
-          <form onSubmit={formik.handleSubmit} className=" lg:px-11 md:px-8 px-5 border-gray-500 rounded-md py-8 container mx-auto bg-white flex flex-wrap ">
-          <h2 className=" text-xl  font-semibold text-center   text-red-500 px-2">Add Category</h2>
+          <form onSubmit={formik.handleSubmit} className="container flex flex-wrap px-5 py-8 mx-auto bg-white border-gray-500 rounded-md  lg:px-11 md:px-8">
+          <h2 className="px-2 text-xl font-semibold text-center text-red-500 ">Add Category</h2>
             <p className="w-full px-2 mt-0 mb-3 ">(all fields are required)</p>  
-          <div className=' w-full px-2 py-1'>
+          <div className='w-full px-2 py-1 '>
 
             <Input 
                   type="text" 
@@ -70,7 +70,7 @@ export default function AddCategory() {
                   errorMessage={formik.errors?.name}
                   isRequired/>
             </div>
-            <div className=' w-full px-2 py-1'>
+            <div className='w-full px-2 py-1 '>
 
             <Input
                   type="file" 
@@ -87,7 +87,7 @@ export default function AddCategory() {
               </div>
 
             <div className='w-full px-2 py-1'>
-            <Button  variant="flat"   type="submit"  className="signUpBtn  mb-3 rounded-md  " >
+            <Button  variant="flat"   type="submit"  className="mb-3 rounded-md signUpBtn " >
               Add Category
             </Button>
             </div>

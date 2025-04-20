@@ -11,7 +11,7 @@ import axios from 'axios'
 
 const Form =(props)=>{
   const handleAddCategory=async(values)=>{
-    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,values,{
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/categories`,values,{
       headers: {'Content-Type': 'application/json'}
       })
         const data = res.data
@@ -100,7 +100,7 @@ export default function AddProduct() {
       formData.append(item,values[item])
     }
     
-    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products`,formData,{
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/products`,formData,{
       headers: {
         'Content-Type': 'multipart/form-data',
       }
@@ -128,7 +128,7 @@ export default function AddProduct() {
     },
     });
   const fetchCategories = async()=>{
-    const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,{
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/categories`,{
       headers: {'Content-Type': 'application/json'}
       })
        const data = res.data

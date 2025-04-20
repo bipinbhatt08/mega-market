@@ -28,7 +28,7 @@ export default function Login() {
   
   const handleRegister = async(values)=>{
       
-      const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/register`,values,{
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/register`,values,{
      
       headers: {'Content-Type': 'application/json'},
       })

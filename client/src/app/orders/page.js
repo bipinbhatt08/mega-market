@@ -161,7 +161,7 @@ export default function Order() {
   const[orderProps,setOrderProps]=useState({})
 
   const fetechOrders = async()=>{
-        const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/my-orders/${userDetails._id}`,{
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/my-orders/${userDetails._id}`,{
           headers: {'Content-Type': 'application/json'}
           })
            const data =  res.data

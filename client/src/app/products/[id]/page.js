@@ -20,7 +20,7 @@ export default function Products({ params }) {
   const discountedPrice = product.dicount!==0?(product.price*(100-product.discount)*0.01).toFixed(2):product.price
 
   const fetchProduct = async()=>{
-    const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${params.id}`,{
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products/${params.id}`,{
         
         headers: {'Content-Type': 'application/json'}
         })

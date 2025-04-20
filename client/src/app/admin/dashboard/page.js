@@ -101,7 +101,7 @@ const App = () => {
   } = theme.useToken();
 
   const fetchProducts = async()=>{
-    const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/admin/products?addedBy=${userDetails._id}`,{
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/admin/products?addedBy=${userDetails._id}`,{
         headers: {'Content-Type': 'application/json'}
         })
          const data = res.data
@@ -111,7 +111,7 @@ const App = () => {
        setProducts(data.products)
   }
   const fetchUsers = async()=>{
-  const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/users`,{
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`,{
     headers: {'Content-Type': 'application/json'}
     })
      const data = res.data
@@ -122,7 +122,7 @@ const App = () => {
     setUsers(data.users)
   }
   const fetchOrders = async()=>{
-  const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders?page=${pageCount}`,{
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/orders?page=${pageCount}`,{
     headers: {'Content-Type': 'application/json'}
     })
      const data = res.data

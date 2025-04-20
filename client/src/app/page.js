@@ -16,7 +16,7 @@ export default function Home() {
   const {isLoggedIn,userDetails}= useSelector(state=>state.user)
   const [products,setProducts]=useState([])
   const fetchProducts = async()=>{
-    const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products`,{
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`,{
         headers: {'Content-Type': 'application/json'}
         })
          const data = res.data
@@ -49,7 +49,7 @@ export default function Home() {
         </div>
       </section>
         <Section heading="Featured Products" subHeading="Handpicked products by our team" bg=" bg-gray-50">
-          <div className="container px-5 lg:py-11 md:py-8 py-5 mx-auto">
+          <div className="container px-5 py-5 mx-auto lg:py-11 md:py-8">
           
             <div className="flex flex-wrap -m-4">
               {

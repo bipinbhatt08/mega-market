@@ -9,7 +9,7 @@ import Link from 'next/link'
 export default function Products() {
   const [categories,setCategories]=useState([])
   const fetchCategories = async()=>{
-    const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/categories`,{
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/categories`,{
        
         headers: {'Content-Type': 'application/json'}
         })

@@ -28,7 +28,7 @@ export default function Login() {
   });
 
   const handleLogin=async(values)=>{
-    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/login`,values,{
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`,values,{
       
       headers: {'Content-Type': 'application/json'}
       })

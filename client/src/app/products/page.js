@@ -11,7 +11,7 @@ import axios from 'axios'
 export default function Products() {
   const [products,setProducts]=useState([])
   const fetchProducts = async()=>{
-    const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products`,{
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`,{
        
         headers: {'Content-Type': 'application/json'}
         })

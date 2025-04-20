@@ -55,7 +55,7 @@ const SingleOrder = ({params}) => {
       
     const [order,setOrder] = useState()
     const fetechOrder = async()=>{
-        const res = await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders/${params.id}`,{
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/orders/${params.id}`,{
           
           headers: {'Content-Type': 'application/json'}
           })

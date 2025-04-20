@@ -34,7 +34,7 @@ export default function Checkout() {
     const purchase_order_id = _id
     const purchase_order_name = "MEGA-ORDER"+ _id
     const values = {amount,purchase_order_id,purchase_order_name}
-    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/payment/khalti/initiate`,values,{
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/payment/khalti/initiate`,values,{
     headers: {
       'Content-Type': 'application/json',
     }
@@ -46,7 +46,7 @@ export default function Checkout() {
 
   
   const createOrder = async(values)=>{
-    const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/orders`,values,{
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/orders`,values,{
     headers: {'Content-Type': 'application/json'}
     })
     const data = res.data

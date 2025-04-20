@@ -6,7 +6,7 @@ import AddProduct from "@/components/editProduct/page";
 import axios from "axios";
 const DisplayProducts = ({products,productEdited,setProductEdited}) =>{
   const handleDelete=async(id,onClose)=>{
-    const res = await axios.delete(`http://localhost:${process.env.NEXT_PUBLIC_API_URL}/products/${id}`,{
+    const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/products/${id}`,{
       
       headers: {'Content-Type': 'application/json'},
       })
