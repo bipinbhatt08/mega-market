@@ -1,8 +1,8 @@
 // const mongoose = require('mongoose');
 const mongoose = require('mongoose');
 const connection=async()=>{
-const isConnected = await mongoose.connect('mongodb://127.0.0.1:27017/eCommerceDb');
-    if(isConnected){
+  const isConnected = await mongoose.connect(process.env.MONGO_URI);
+  if(isConnected){
       console.log("Connected")
     }else{
       console.log("Connection failed")
