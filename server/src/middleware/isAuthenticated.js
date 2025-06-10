@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 const {promisify} = require("util")
-const User = require("../model/userModel")
+const User = require("../models/user.model")
 
 const isAuthenticated = async (req,res,next)=>{
     const token = req.headers.authorization
