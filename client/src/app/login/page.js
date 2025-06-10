@@ -62,7 +62,7 @@ export default function Login() {
         <Layout>
           <BreadCrumb page="Login" />
           <Section heading="Login" subHeading="Sign in for personalized features" bg="bg-gray-100">
-          <div className=" lg:w-1/2 md:w-2/3 sm:w-full container bg-white py-5 my-5  rounded-lg mx-auto columns-1  login-form" >
+          <div className="container py-5 mx-auto my-5 bg-white rounded-lg  lg:w-1/2 md:w-2/3 sm:w-full columns-1 login-form" >
                 <form onSubmit={formik.handleSubmit} className=''>
                   <Input 
                   type="email" 
@@ -92,10 +92,10 @@ export default function Login() {
                    // isInvalid={!formik.isValid}
                    errorMessage={formik.errors?.password}
                   isRequired/>
-                  <Button  variant="flat" fullWidth type="submit" className="signUpBtn mt-3 mb-3" >
+                  <Button  variant="flat" fullWidth type="submit" className="mt-3 mb-3 signUpBtn" >
                     Sign In
                   </Button>
-                  <p className="text-center ">Don't have account? <Link href="/register"className="color-red">Register</Link></p>
+                  <p className="text-center ">Don&apos;t have account? <Link href="/register"className="color-red">Register</Link></p>
                 </form>
           </div>
           </Section>

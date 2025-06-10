@@ -97,11 +97,11 @@ export default function Checkout() {
           <BreadCrumb page="Checkout" />
           <Section heading="Cart" subHeading="Billing Details" bg="bg-gray-100">
            
-            <div className="lg:flex p-5  my-5 bg-white rounded bg-gray-100 items-center">
-                <div className="lg:w-2/3 lg:pr-4  ">
-                <form className="  border-gray-500 rounded-md  container mx-auto bg-white flex flex-wrap ">
-                <h1 className='font-semibold text-lg text-gray-500 border-b-2 mb-4 pb-2 mx-2 pt-3 w-full'>Billing Details</h1>
-                    <div className=' w-1/2 px-2 py-1'>
+            <div className="items-center p-5 my-5 bg-white bg-gray-100 rounded lg:flex">
+                <div className="lg:w-2/3 lg:pr-4 ">
+                <form className="container flex flex-wrap mx-auto bg-white border-gray-500 rounded-md ">
+                <h1 className='w-full pt-3 pb-2 mx-2 mb-4 text-lg font-semibold text-gray-500 border-b-2'>Billing Details</h1>
+                    <div className='w-1/2 px-2 py-1 '>
 
                     <Input 
                           type="text" 
@@ -118,7 +118,7 @@ export default function Checkout() {
                           isRequired/>
                     </div>
 
-                    <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
+                    <div className='w-1/2 px-2 py-1  lg:w-1/2 md:w-1/2'>
                     <Input 
                           type="text" 
                           name="lastName" 
@@ -133,7 +133,7 @@ export default function Checkout() {
                           errorMessage={formik.errors?.lastName}
                           isRequired/>
                     </div>
-                    <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
+                    <div className='w-1/2 px-2 py-1  lg:w-1/2 md:w-1/2'>
                       <Input 
                           type="text" 
                           name="phoneNo" 
@@ -148,7 +148,7 @@ export default function Checkout() {
                           errorMessage={formik.errors?.phoneNo}
                           isRequired/>
                     </div>
-                    <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
+                    <div className='w-1/2 px-2 py-1  lg:w-1/2 md:w-1/2'>
                       <Input 
                           type="text" 
                           name="country" 
@@ -163,7 +163,7 @@ export default function Checkout() {
                           errorMessage={formik.errors?.country}
                           isRequired/>
                     </div>
-                    <div className=' w-full px-2 py-1'>
+                    <div className='w-full px-2 py-1 '>
                       <Input 
                           type="text" 
                           name="streetAddress" 
@@ -178,7 +178,7 @@ export default function Checkout() {
                           errorMessage={formik.errors?.streetAddress}
                           isRequired/>
                     </div>
-                    <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
+                    <div className='w-1/2 px-2 py-1  lg:w-1/2 md:w-1/2'>
                       <Input 
                           type="text" 
                           name="city" 
@@ -193,7 +193,7 @@ export default function Checkout() {
                           errorMessage={formik.errors?.city}
                           isRequired/>
                     </div>
-                    <div className=' lg:w-1/2 md:w-1/2 w-1/2 px-2 py-1'>
+                    <div className='w-1/2 px-2 py-1  lg:w-1/2 md:w-1/2'>
                       <Input 
                           type="text" 
                           name="state" 
@@ -208,7 +208,7 @@ export default function Checkout() {
                           errorMessage={formik.errors?.state}
                           isRequired/>
                     </div>
-                    <div className=' w-full px-2 py-1 '>
+                    <div className='w-full px-2 py-1 '>
                     <Textarea
                     label="Order Notes (Optional)"
                     name='orderNotes'
@@ -224,39 +224,39 @@ export default function Checkout() {
                   </form>
                   
                 </div> 
-                <div className="lg:w-1/3 p-3 mt-4 lg:mt-0 border border-gray-300 border-2 border-dashed rounded">
-                    <h1 className='font-semibold text-lg text-gray-500 border-b-2 mb-4 pb-2 pt-3'>Order summary</h1>
+                <div className="p-3 mt-4 border border-2 border-gray-300 border-dashed rounded lg:w-1/3 lg:mt-0">
+                    <h1 className='pt-3 pb-2 mb-4 text-lg font-semibold text-gray-500 border-b-2'>Order summary</h1>
                     <div className="flex items-center justify-between py-2 border-b">
-                      <p className='font-semibold  text-gray-500 '>Products </p>
-                      <p className='font-semibold  text-gray-500 '>Quantity</p>
-                      <p className='font-semibold  text-gray-500 '>Total</p>
+                      <p className='font-semibold text-gray-500 '>Products </p>
+                      <p className='font-semibold text-gray-500 '>Quantity</p>
+                      <p className='font-semibold text-gray-500 '>Total</p>
                     </div>
                     {arrProducts&& arrProducts.map((product)=>{
                       return (
-                        <div className="lg:flex lg:items-center lg:justify-between  py-2 ">
-                            <div className="flex items-center lg:w-1/3  ">
+                        <div className="py-2 lg:flex lg:items-center lg:justify-between " key={product._id}>
+                            <div className="flex items-center lg:w-1/3 ">
                               <img src={"http://localhost:5000/productImgs/"+product.productImage}  alt="image" width={50} height={50} className=''/>
                               <Link href={`/products/${product._id}`}><p className='ml-3 hover:text-red-500'>{product.title}</p></Link> 
                             </div>
-                            <p className='  text-gray-500 '>{product.orderedQuantity}</p> 
-                            <p className='  text-gray-500'>{product.orderedQuantity*product.discountedPrice}</p> 
+                            <p className='text-gray-500 '>{product.orderedQuantity}</p> 
+                            <p className='text-gray-500 '>{product.orderedQuantity*product.discountedPrice}</p> 
                         </div>
                       )
                     })}
-                    <div className="flex items-center justify-between py-3 border-y my-2 ">
-                      <p className='font-semibold  text-gray-500 '>Sub Total:</p>
-                      <p className='font-semibold  text-gray-500 '>Rs. {grandTotal?.toFixed(2)}</p>
+                    <div className="flex items-center justify-between py-3 my-2 border-y ">
+                      <p className='font-semibold text-gray-500 '>Sub Total:</p>
+                      <p className='font-semibold text-gray-500 '>Rs. {grandTotal?.toFixed(2)}</p>
                     </div>
-                    <div className="flex items-center justify-between py-2 border-b my-2 ">
-                      <p className='font-semibold  text-gray-500 '>Shipping:</p>
-                      <p className='font-semibold  text-gray-500 '>Free shipping</p>
+                    <div className="flex items-center justify-between py-2 my-2 border-b ">
+                      <p className='font-semibold text-gray-500 '>Shipping:</p>
+                      <p className='font-semibold text-gray-500 '>Free shipping</p>
                     </div>
-                    <div className='mt-3 py-2' >
+                    <div className='py-2 mt-3' >
                     <div className="flex items-center justify-between ">
-                      <p className='font-semibold  text-red-500 '> Total</p>
-                      <p className='font-semibold  text-red-500 '>Rs. {grandTotal?.toFixed(2)}</p>
+                      <p className='font-semibold text-red-500 '> Total</p>
+                      <p className='font-semibold text-red-500 '>Rs. {grandTotal?.toFixed(2)}</p>
                     </div>
-                    <div className="flex flex-col gap-3 mt-3 py-2">
+                    <div className="flex flex-col gap-3 py-2 mt-3">
                         <RadioGroup
                           value={selected}
                           onValueChange={setSelected}
@@ -267,9 +267,9 @@ export default function Checkout() {
                           <Radio value="khalti">Khalti</Radio>
                         </RadioGroup>
                     </div>
-                     <div className="flex itmes-center justify-around mt-4">
-                      <Button as={Link} href='/cart' className=' text-red-500 border border-red-500 py-2 px-3 mt-3 bg-white rounded hover:bg-red-400 hover:text-white  transition'>Back to cart</Button>
-                      <Button onClick={formik.handleSubmit}  className='text-white border border-red-500 py-2 px-3 mt-3 bg-red-500 rounded hover:bg-red-400  transition'>Place Order</Button>
+                     <div className="flex justify-around mt-4 itmes-center">
+                      <Button as={Link} href='/cart' className='px-3 py-2 mt-3 text-red-500 transition bg-white border border-red-500 rounded  hover:bg-red-400 hover:text-white'>Back to cart</Button>
+                      <Button onClick={formik.handleSubmit}  className='px-3 py-2 mt-3 text-white transition bg-red-500 border border-red-500 rounded hover:bg-red-400'>Place Order</Button>
                      </div>
                     </div>
                 </div>

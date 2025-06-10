@@ -7,19 +7,19 @@ import { Button } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
-import { Table,ConfigProvider } from 'antd';
+import { Table,ConfigProvider, Steps } from 'antd';
 import Link from 'next/link';
 import axios from 'axios';
 
 const OrderDetailsContainer = ({order}) => {
   const arrProducts = Object.values(order.products)
   return (
-    <div className='mt-10 p-2'>
-      <h1 className='text-2xl font-semibold text-red-500 mb-5 pb-5'>Order Details</h1>
-      <Step order={order} />
-      <h1 className='text-lg font-semibold mt-5 mb-3 underline'>Order Id : {order._id}</h1>
+    <div className='p-2 mt-10'>
+      <h1 className='pb-5 mb-5 text-2xl font-semibold text-red-500'>Order Details</h1>
+      <Steps order={order} />
+      <h1 className='mt-5 mb-3 text-lg font-semibold underline'>Order Id : {order._id}</h1>
 
-      <div className="flex gap-x-5  flex-wrap ">
+      <div className="flex flex-wrap gap-x-5 ">
         <p ><span className="font-semibold">Total Type Of Products:</span> {Object.keys(order.products).length}</p>
         <p ><span className="font-semibold">Total Cost:  </span> Rs.{order.totalPrice}</p>
         <p ><span className="font-semibold">Payment Method: </span> {order.paymentMethod} </p>
@@ -31,29 +31,29 @@ const OrderDetailsContainer = ({order}) => {
       </div>
       <div class="lg:flex   my-5 bg-white rounded">
                 <div class="lg:w-full lg:pr-4  ">
-                  <div className="lg:flex items-center justify-between border-b-2 pb-2  border-b-gray-300 hidden ">
-                          <p className='font-semibold  text-gray-500  w-1/3'>Product</p>
-                          <p className='font-semibold  text-gray-500 '>Quantity</p>
-                          <p className='font-semibold  text-gray-500 '>Rate</p>
-                          <p className='font-semibold  text-gray-500'>Total</p>
+                  <div className="items-center justify-between hidden pb-2 border-b-2 lg:flex border-b-gray-300 ">
+                          <p className='w-1/3 font-semibold text-gray-500'>Product</p>
+                          <p className='font-semibold text-gray-500 '>Quantity</p>
+                          <p className='font-semibold text-gray-500 '>Rate</p>
+                          <p className='font-semibold text-gray-500'>Total</p>
                   </div>
                   {arrProducts.length==0 && 
                   
-                  <p className="text-center mx-auto pt-5">No itmes in cart</p>
+                  <p className="pt-5 mx-auto text-center">No itmes in cart</p>
                   
                   }
                   {arrProducts&& arrProducts.map((product)=>{
                     return (
-                      <div className="lg:flex lg:items-center lg:justify-between border-b border-b-gray-300 py-2 ">
-                          <div className="flex items-center lg:w-1/3  ">
+                      <div className="py-2 border-b lg:flex lg:items-center lg:justify-between border-b-gray-300 " key={product._id}>
+                          <div className="flex items-center lg:w-1/3 ">
                             <img src={"http://localhost:5000/productImgs/"+product.productImage}  alt="image" width={150} height={150} className=''/>
-                            <p className='ml-3 hover:text-red-500 transition '> <Link href={'/products/'+product._id}>{product.title}</Link>  </p>
+                            <p className='ml-3 transition hover:text-red-500 '> <Link href={'/products/'+product._id}>{product.title}</Link>  </p>
                           </div>
                           
-                          <p className='  text-gray-500 '>{product.orderedQuantity}</p>
-                          <p className='  text-gray-500 '>{product.discountedPrice}</p>
+                          <p className='text-gray-500 '>{product.orderedQuantity}</p>
+                          <p className='text-gray-500 '>{product.discountedPrice}</p>
                     
-                          <p className='  text-gray-500'>{(product.orderedQuantity * product.discountedPrice).toFixed(2)}</p>
+                          <p className='text-gray-500 '>{(product.orderedQuantity * product.discountedPrice).toFixed(2)}</p>
                          
                   </div>
                     )
@@ -185,7 +185,7 @@ export default function Order() {
           <BreadCrumb page="My Orders" />
           <Section heading="Orders" subHeading="All the details about your order" bg="bg-gray-100">
              
-            <div className="my-5 p-5 bg-white">
+            <div className="p-5 my-5 bg-white">
 
               <ConfigProvider
                 theme={{

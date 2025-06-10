@@ -33,22 +33,23 @@ export default function Products() {
         <Breadcrumb page="Categories"/>
         <Section heading="Categories" subHeading="All The Categories " bg=" bg-gray-50">
         <div className="bg-white dark:bg-gray-900 dark:text-gray-100">
-          <div className="container mx-auto px-4 py-16 lg:px-8 lg:my-12 xl:max-w-7xl">
+          <div className="container px-4 py-16 mx-auto lg:px-8 lg:my-12 xl:max-w-7xl">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
              {
                 categories.map((category)=>{
-                    return  <Link
+                    return <Link
+                    key={category._id}
                     href="/login"
-                    className="group relative block overflow-hidden transition ease-out active:opacity-75 sm:col-span-2 md:col-span-1"
+                    className="relative block overflow-hidden transition ease-out group active:opacity-75 sm:col-span-2 md:col-span-1"
                   >
                     <img
                       src="https://cdn.tailkit.com/media/placeholders/photo-PDX_a_82obo-700x700.jpg"
                       alt="Product Image"
                       className="transition ease-out group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-black/25 transition ease-out group-hover:bg-black/0" />
+                    <div className="absolute inset-0 transition ease-out bg-black/25 group-hover:bg-black/0" />
                     <div className="absolute inset-0 flex items-center justify-center p-4">
-                      <div className="rounded-3xl bg-white/95 px-4 py-3 text-sm font-semibold uppercase tracking-wide transition ease-out group-hover:bg-rose-600 group-hover:text-white dark:border-gray-800 dark:bg-gray-900/90">
+                      <div className="px-4 py-3 text-sm font-semibold tracking-wide uppercase transition ease-out rounded-3xl bg-white/95 group-hover:bg-rose-600 group-hover:text-white dark:border-gray-800 dark:bg-gray-900/90">
                         {category.name}
                       </div>
                     </div>

@@ -56,6 +56,7 @@ export default function Home() {
                 products.map((product)=>{
                   return (
                     <ProductCard
+                    key={product._id}
                     productDetails={product}
                     />
                   )

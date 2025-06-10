@@ -151,7 +151,7 @@ const App = () => {
         return <div><DisplayOrders orders={orders} pageCount={pageCount} orderCount={orderCount} setPageCount={setPageCount}/></div>
       case '5':
         return <div>
-          "HELLO"
+          &quot;HELLO&quot;
         </div>
       default:
         return <div>Default Content</div>
@@ -183,16 +183,16 @@ const App = () => {
   if(!isLoggedIn)return router.push("/login")
   return (
   <div>
-      <Header className="justify-between p-0 pr-5 px-2" style={{ display: 'flex', alignItems: 'center'}}>
+      <Header className="justify-between p-0 px-2 pr-5" style={{ display: 'flex', alignItems: 'center'}}>
         <div className="flex items-center justify-start">
           <img src="/gharJaggaLogo.png" alt="" height={70} width={70} />
           <p className="text-white">MEGA MARKET</p>
         </div>
-        <h2 className="text-white text-lg font-semibold ml-5">Hello  <span className='text-danger'>{userDetails.username}</span>!, Welcome </h2>
-        <div className="flex justify-between items-center gap-5 "> 
+        <h2 className="ml-5 text-lg font-semibold text-white">Hello  <span className='text-danger'>{userDetails.username}</span>!, Welcome </h2>
+        <div className="flex items-center justify-between gap-5 "> 
           <Dropdown placement="bottom-">
             <DropdownTrigger>
-            <div className='p-0 m-0  flex items-center '>
+            <div className='flex items-center p-0 m-0 '>
             <Badge content={notificationCount.toString()} shape="circle" color="danger" size="md">
             <IoMdNotifications size={30} color="white" className="cursor-pointer"  />
             </Badge>
@@ -201,7 +201,7 @@ const App = () => {
             
             <DropdownMenu aria-label="Profile Actions" variant="flat" 
                 onAction={(key) => alert(key)}>
-              <DropdownItem key="profile" className="h-14 gap-2">
+              <DropdownItem key="profile" className="gap-2 h-14">
                 <p className="font-semibold">{n}</p>
               </DropdownItem>
             </DropdownMenu>
@@ -221,7 +221,7 @@ const App = () => {
             
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
+              <DropdownItem key="profile" className="gap-2 h-14">
                 <p className="font-semibold">Signed in as</p>
                 <p className="font-semibold">{userDetails.email}</p>
               </DropdownItem>
@@ -264,7 +264,7 @@ const App = () => {
             </Menu.Item>
           </Menu>
         </Sider>
-        <Layout className="  ">
+        <Layout className="">
           <Header style={{ padding: 0, background: 'white'}}>
             <Button
               type="text"

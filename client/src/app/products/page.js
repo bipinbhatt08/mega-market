@@ -33,13 +33,14 @@ export default function Products() {
       <Layout>
         <Breadcrumb page="Products"/>
         <Section heading="Products" subHeading="All The Products " bg=" bg-gray-50">
-          <div className="container px-5 lg:py-11 md:py-8 py-5 mx-auto">
+          <div className="container px-5 py-5 mx-auto lg:py-11 md:py-8">
           
             <div className="flex flex-wrap -m-4">
               {
                 products.map((product)=>{
                   return (
                     <ProductCard
+                    key={product.keys}
                     productDetails={product}
                     />
                   )

@@ -100,46 +100,46 @@ export default function Cart() {
            
             <div class="lg:flex p-5  my-5 bg-white rounded">
                 <div class="lg:w-2/3 lg:pr-4  ">
-                  <div className="lg:flex items-center justify-between border-b-2 pb-2  border-b-gray-300 hidden ">
-                          <p className='font-semibold  text-gray-500  w-1/5'>Product</p>
-                          <p className='font-semibold  text-gray-500 '>Quantity</p>
-                          <p className='font-semibold  text-gray-500 '>Price</p>
-                          <p className='font-semibold  text-gray-500'>Total</p>
-                          <p className='font-semibold  text-gray-500'>Action</p>
+                  <div className="items-center justify-between hidden pb-2 border-b-2 lg:flex border-b-gray-300 ">
+                          <p className='w-1/5 font-semibold text-gray-500'>Product</p>
+                          <p className='font-semibold text-gray-500 '>Quantity</p>
+                          <p className='font-semibold text-gray-500 '>Price</p>
+                          <p className='font-semibold text-gray-500'>Total</p>
+                          <p className='font-semibold text-gray-500'>Action</p>
                   </div>
                   {arrProducts.length==0 && 
                   
-                  <p className="text-center mx-auto pt-5">No itmes in cart</p>
+                  <p className="pt-5 mx-auto text-center">No itmes in cart</p>
                   
                   }
                   {arrProducts&& arrProducts.map((product)=>{
                     return (
-                      <div className="lg:flex lg:items-center lg:justify-between border-b border-b-gray-300 py-2 ">
-                          <div className="flex items-center lg:w-1/5  ">
+                      <div className="py-2 border-b lg:flex lg:items-center lg:justify-between border-b-gray-300 " key={product._id}>
+                          <div className="flex items-center lg:w-1/5 ">
                             <img src={"http://localhost:5000/productImgs/"+product.productImage}  alt="image" width={50} height={50} className=''/>
                             <p className='ml-3'>{product.title} </p>
                           </div>
-                          <div className=' flex items-center justify-between  border-1  border-gray-400 p-2 text-gray-500 rounded  'style={{width:"100px"}}>
+                          <div className='flex items-center justify-between p-2 text-gray-500 border-gray-400 rounded  border-1'style={{width:"100px"}}>
                                 <button onClick={()=>handleClick(product._id,'-',product.quantity,product.discountedPrice)}><FaMinus/></button> <p className='px-1'>{qty[product._id]}/{product.quantity}</p> <button className="cursor-pointer" onClick={()=>handleClick(product._id,'+',product.quantity,product.discountedPrice)}><FaPlus/></button>
                           </div>
-                          <p className='  text-gray-500 '>{product.discountedPrice}</p>
+                          <p className='text-gray-500 '>{product.discountedPrice}</p>
                           
-                          <p className='  text-gray-500'>{totalPrice[product._id]}</p>
-                          <div className=' '>
-                              <button className=' px-2 py-1 rounded  bg-red-500 text-white hover:bg-red-400 transition' onClick={()=>handleRemove(product._id)} >remove</button>
+                          <p className='text-gray-500 '>{totalPrice[product._id]}</p>
+                          <div className=''>
+                              <button className='px-2 py-1 text-white transition bg-red-500 rounded  hover:bg-red-400' onClick={()=>handleRemove(product._id)} >remove</button>
                           </div>
                   </div>
                     )
                   })}
                 </div> 
                 <div class="lg:w-1/3 p-3 mt-4 lg:mt-0 border border-gray-300 border-2 border-dashed rounded">
-                    <h1 className='font-semibold text-lg text-gray-500 border-b-2 mb-4 pb-2 pt-3'>Cart Total</h1>
+                    <h1 className='pt-3 pb-2 mb-4 text-lg font-semibold text-gray-500 border-b-2'>Cart Total</h1>
                     <div className="flex items-center justify-between py-2 border-b">
-                      <p className='font-semibold  text-gray-500 '>Sub Total:</p>
-                      <p className='font-semibold  text-gray-500 '>Rs. {grandTotal}</p>
+                      <p className='font-semibold text-gray-500 '>Sub Total:</p>
+                      <p className='font-semibold text-gray-500 '>Rs. {grandTotal}</p>
                     </div>
-                    <div className='border-b py-2' >
-                      <p className='font-semibold  text-gray-500'>Shipping</p>
+                    <div className='py-2 border-b' >
+                      <p className='font-semibold text-gray-500'>Shipping</p>
                       will be added later
                       will be added later
                       will be added later
@@ -149,13 +149,13 @@ export default function Cart() {
                       will be added later
                       will be added later
                     </div>
-                    <div className='mt-3 py-2' >
+                    <div className='py-2 mt-3' >
                     <div className="flex items-center justify-between ">
-                      <p className='font-semibold  text-red-500 '> Total</p>
-                      <p className='font-semibold  text-red-500 '>Rs. {grandTotal}</p>
+                      <p className='font-semibold text-red-500 '> Total</p>
+                      <p className='font-semibold text-red-500 '>Rs. {grandTotal}</p>
                     </div>
-                     <div className="flex itmes-center justify-center mt-4">
-                     <Button onClick={handleProceedToCheckout}className='mx-auto text-red-500 border border-red-500 bg-white py-2 px-3 rounded hover:bg-red-500 hover:text-white transition'>Proceed to checkout</Button>
+                     <div className="flex justify-center mt-4 itmes-center">
+                     <Button onClick={handleProceedToCheckout}className='px-3 py-2 mx-auto text-red-500 transition bg-white border border-red-500 rounded hover:bg-red-500 hover:text-white'>Proceed to checkout</Button>
                      </div>
                     </div>
                 </div>
