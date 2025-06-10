@@ -15,7 +15,21 @@ io.on('connection', (socket) => {
 })
 
 const cors = require('cors')
-app.use(cors())
+
+
+const allowedOrigins = ['http://localhost:3000', 'https://mega-market-flame.vercel.app'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
 //dotenv
 require('dotenv').config()
 const port = process.env.PORT
