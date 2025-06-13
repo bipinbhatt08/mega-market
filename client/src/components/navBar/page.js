@@ -19,11 +19,26 @@ export default function App() {
   const dispatch = useDispatch()
   const noOfitemsInCart = Object.keys(products).length;
   const menuItems = [
-    "Home",
-    "Products",
-    "Categories",
-    "About Us",
-    "Contact Us"
+    {
+      name:"Home",
+      path:'/'
+    },
+    {
+      name:"Products",
+      path:'/products'
+    },
+    {
+      name:"Categories",
+      path:'/categories'
+    },
+    {
+      name:"About Us",
+      path:'/about-us'
+    },
+    {
+      name:"Contact Us",
+      path:'/contact-us'
+    },
   ];
     const UserAvatarDropDown = ()=>{
 
@@ -217,10 +232,10 @@ export default function App() {
                 index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
               }
               className="w-full"
-              href={'/'+item.toLowerCase().replace(/\s+/g, '-')}
+              href={item.path}
               size="lg"
             >
-              {item}
+              {item.name}
             </Link>
           </NavbarMenuItem>
         ))}
