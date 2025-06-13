@@ -217,7 +217,7 @@ export default function App() {
                 index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
               }
               className="w-full"
-              href={process.env.NEXT_PUBLIC_API_URI+'/'+item.toLowerCase().replace(/\s+/g, '-')}
+              href={'/'+item.toLowerCase().replace(/\s+/g, '-')}
               size="lg"
             >
               {item}
