@@ -93,7 +93,7 @@ const DisplayOrders =({orders,pageCount,orderCount,setPageCount})=>{
                       return (
                         <div className="py-2 border-b lg:flex lg:items-center lg:justify-between border-b-gray-300 " key={product._id}>
                             <div className="flex items-center lg:w-1/3 ">
-                              <img src={"http://localhost:5000/productImgs/"+product.productImage}  alt="image" width={70} height={70} className=''/>
+                              <img src={process.env.NEXT_PUBLIC_API_URI+'/productImgs/'+product.productImage}  alt="image" width={70} height={70} className=''/>
                               <p className='ml-3 transition hover:text-red-500 '> <Link href={'/products/'+product._id}>{product.title}</Link>  </p>
                             </div>
                             

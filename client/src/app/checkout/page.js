@@ -133,7 +133,7 @@ export default function Checkout() {
                           errorMessage={formik.errors?.lastName}
                           isRequired/>
                     </div>
-                    <div className='w-1/2 px-2 py-1  lg:w-1/2 md:w-1/2'>
+                    <div className='w-1/2 px-2 py-1 lg:w-1/2 md:w-1/2'>
                       <Input 
                           type="text" 
                           name="phoneNo" 
@@ -148,7 +148,7 @@ export default function Checkout() {
                           errorMessage={formik.errors?.phoneNo}
                           isRequired/>
                     </div>
-                    <div className='w-1/2 px-2 py-1  lg:w-1/2 md:w-1/2'>
+                    <div className='w-1/2 px-2 py-1 lg:w-1/2 md:w-1/2'>
                       <Input 
                           type="text" 
                           name="country" 
@@ -178,7 +178,7 @@ export default function Checkout() {
                           errorMessage={formik.errors?.streetAddress}
                           isRequired/>
                     </div>
-                    <div className='w-1/2 px-2 py-1  lg:w-1/2 md:w-1/2'>
+                    <div className='w-1/2 px-2 py-1 lg:w-1/2 md:w-1/2'>
                       <Input 
                           type="text" 
                           name="city" 
@@ -193,7 +193,7 @@ export default function Checkout() {
                           errorMessage={formik.errors?.city}
                           isRequired/>
                     </div>
-                    <div className='w-1/2 px-2 py-1  lg:w-1/2 md:w-1/2'>
+                    <div className='w-1/2 px-2 py-1 lg:w-1/2 md:w-1/2'>
                       <Input 
                           type="text" 
                           name="state" 
@@ -235,7 +235,7 @@ export default function Checkout() {
                       return (
                         <div className="py-2 lg:flex lg:items-center lg:justify-between " key={product._id}>
                             <div className="flex items-center lg:w-1/3 ">
-                              <img src={"http://localhost:5000/productImgs/"+product.productImage}  alt="image" width={50} height={50} className=''/>
+                              <img src={process.env.NEXT_PUBLIC_API_URI+'/productImgs/'+product.productImage}  alt="image" width={50} height={50} className=''/>
                               <Link href={`/products/${product._id}`}><p className='ml-3 hover:text-red-500'>{product.title}</p></Link> 
                             </div>
                             <p className='text-gray-500 '>{product.orderedQuantity}</p> 
@@ -268,7 +268,7 @@ export default function Checkout() {
                         </RadioGroup>
                     </div>
                      <div className="flex justify-around mt-4 itmes-center">
-                      <Button as={Link} href='/cart' className='px-3 py-2 mt-3 text-red-500 transition bg-white border border-red-500 rounded  hover:bg-red-400 hover:text-white'>Back to cart</Button>
+                      <Button as={Link} href='/cart' className='px-3 py-2 mt-3 text-red-500 transition bg-white border border-red-500 rounded hover:bg-red-400 hover:text-white'>Back to cart</Button>
                       <Button onClick={formik.handleSubmit}  className='px-3 py-2 mt-3 text-white transition bg-red-500 border border-red-500 rounded hover:bg-red-400'>Place Order</Button>
                      </div>
                     </div>

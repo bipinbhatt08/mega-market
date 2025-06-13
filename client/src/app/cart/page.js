@@ -116,17 +116,17 @@ export default function Cart() {
                     return (
                       <div className="py-2 border-b lg:flex lg:items-center lg:justify-between border-b-gray-300 " key={product._id}>
                           <div className="flex items-center lg:w-1/5 ">
-                            <img src={"http://localhost:5000/productImgs/"+product.productImage}  alt="image" width={50} height={50} className=''/>
+                            <img src={process.env.NEXT_PUBLIC_API_URI+'/productImgs/'+product.productImage}  alt="image" width={50} height={50} className=''/>
                             <p className='ml-3'>{product.title} </p>
                           </div>
-                          <div className='flex items-center justify-between p-2 text-gray-500 border-gray-400 rounded  border-1'style={{width:"100px"}}>
+                          <div className='flex items-center justify-between p-2 text-gray-500 border-gray-400 rounded border-1'style={{width:"100px"}}>
                                 <button onClick={()=>handleClick(product._id,'-',product.quantity,product.discountedPrice)}><FaMinus/></button> <p className='px-1'>{qty[product._id]}/{product.quantity}</p> <button className="cursor-pointer" onClick={()=>handleClick(product._id,'+',product.quantity,product.discountedPrice)}><FaPlus/></button>
                           </div>
                           <p className='text-gray-500 '>{product.discountedPrice}</p>
                           
                           <p className='text-gray-500 '>{totalPrice[product._id]}</p>
                           <div className=''>
-                              <button className='px-2 py-1 text-white transition bg-red-500 rounded  hover:bg-red-400' onClick={()=>handleRemove(product._id)} >remove</button>
+                              <button className='px-2 py-1 text-white transition bg-red-500 rounded hover:bg-red-400' onClick={()=>handleRemove(product._id)} >remove</button>
                           </div>
                   </div>
                     )

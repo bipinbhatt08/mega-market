@@ -1,8 +1,10 @@
 const axios =  require('axios') 
 exports.initiatePayment = async(req,res)=>{
     try {
-        const website_url = 'http://localhost:3000'
-        const return_url =  'http://localhost:3000/success'
+        // const website_url = 'http://localhost:3000'
+        const website_url = 'https://mega-market-flame.vercel.app/'
+        // const return_url =  'http://localhost:3000/success'
+        const return_url =  'https://mega-market-flame.vercel.app//success'
         const values = {website_url,return_url,...req.body}
         console.log(values)
         const response= await axios.post(`https://a.khalti.com/api/v2/epayment/initiate/`,values, {
