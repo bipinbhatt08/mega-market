@@ -28,7 +28,7 @@ const Page = (props) => {
         <div className="relative px-2 overflow-hidden bg-white bg-opacity-75 border rounded-lg product-card">
         
             <div className="relative py-2 product-image-container ">
-            <img className="object-cover w-full h-full" src={process.env.NEXT_PUBLIC_API_URI+'/productImgs/'+productDetails.productImage} />
+            <img className="object-cover w-full h-full" src={process.env.NEXT_PUBLIC_API_URL+'/productImgs/'+productDetails.productImage} />
            
                 <div className='absolute flex w-2/3 top-3 left-3'>
                     {/* <p className='px-2 py-1 text-xs text-center bg-black rounded-md color-white'>Featured</p> */}

@@ -80,7 +80,7 @@ export default function Products({ params }) {
 
                 </div>
               </div>
-              <img alt="ecommerce" className="object-cover object-center w-full h-64 rounded lg:w-1/2 lg:h-auto" src={process.env.NEXT_PUBLIC_API_URI+'/productImgs/'+product.productImage} />
+              <img alt="ecommerce" className="object-cover object-center w-full h-64 rounded lg:w-1/2 lg:h-auto" src={process.env.NEXT_PUBLIC_API_URL+'/productImgs/'+product.productImage} />
             </div>
           </div>
         </section>

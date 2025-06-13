@@ -118,7 +118,7 @@ export default function Checkout() {
                           isRequired/>
                     </div>
 
-                    <div className='w-1/2 px-2 py-1  lg:w-1/2 md:w-1/2'>
+                    <div className='w-1/2 px-2 py-1 lg:w-1/2 md:w-1/2'>
                     <Input 
                           type="text" 
                           name="lastName" 
@@ -235,7 +235,7 @@ export default function Checkout() {
                       return (
                         <div className="py-2 lg:flex lg:items-center lg:justify-between " key={product._id}>
                             <div className="flex items-center lg:w-1/3 ">
-                              <img src={process.env.NEXT_PUBLIC_API_URI+'/productImgs/'+product.productImage}  alt="image" width={50} height={50} className=''/>
+                              <img src={process.env.NEXT_PUBLIC_API_URL+'/productImgs/'+product.productImage}  alt="image" width={50} height={50} className=''/>
                               <Link href={`/products/${product._id}`}><p className='ml-3 hover:text-red-500'>{product.title}</p></Link> 
                             </div>
                             <p className='text-gray-500 '>{product.orderedQuantity}</p> 

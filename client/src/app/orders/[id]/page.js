@@ -110,7 +110,7 @@ const SingleOrder = ({params}) => {
                       return (
                         <div key={product._id} className="py-2 border-b lg:flex lg:items-center lg:justify-between border-b-gray-300 ">
                             <div className="flex items-center lg:w-1/3 ">
-                              <img src={process.env.NEXT_PUBLIC_API_URI+'/productImgs/'+product.productImage}  alt="image" width={150} height={150} className=''/>
+                              <img src={process.env.NEXT_PUBLIC_API_URL+'/productImgs/'+product.productImage}  alt="image" width={150} height={150} className=''/>
                               <p className='ml-3 transition hover:text-red-500 '> <Link href={'/products/'+product._id}>{product.title}</Link>  </p>
                             </div>
                             

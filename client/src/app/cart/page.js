@@ -116,7 +116,7 @@ export default function Cart() {
                     return (
                       <div className="py-2 border-b lg:flex lg:items-center lg:justify-between border-b-gray-300 " key={product._id}>
                           <div className="flex items-center lg:w-1/5 ">
-                            <img src={process.env.NEXT_PUBLIC_API_URI+'/productImgs/'+product.productImage}  alt="image" width={50} height={50} className=''/>
+                            <img src={process.env.NEXT_PUBLIC_API_URL+'/productImgs/'+product.productImage}  alt="image" width={50} height={50} className=''/>
                             <p className='ml-3'>{product.title} </p>
                           </div>
                           <div className='flex items-center justify-between p-2 text-gray-500 border-gray-400 rounded border-1'style={{width:"100px"}}>
