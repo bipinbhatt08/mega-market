@@ -19,16 +19,11 @@ export default function App() {
   const dispatch = useDispatch()
   const noOfitemsInCart = Object.keys(products).length;
   const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    "Home",
+    "Products",
+    "Categories",
+    "About Us",
+    "Contact Us"
   ];
     const UserAvatarDropDown = ()=>{
 
@@ -55,7 +50,7 @@ export default function App() {
         </Tooltip>
         </Badge>
        </NavbarItem>
-       <NavbarItem className="mr-2 hidden lg:flex">
+       <NavbarItem className="hidden mr-2 lg:flex">
        <Badge content="0" shape="circle" color="danger">
        <Tooltip showArrow={true} color="danger" content="Wishlist">
           <Button
@@ -83,7 +78,7 @@ export default function App() {
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
+            <DropdownItem key="profile" className="gap-2 h-14">
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{userDetails.email}</p>
             </DropdownItem>
@@ -140,7 +135,7 @@ export default function App() {
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
+            <DropdownItem key="profile" className="gap-2 h-14">
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{userDetails.email}</p>
             </DropdownItem>
@@ -167,11 +162,11 @@ export default function App() {
         <Link href={'/'}>
           <NavbarBrand >
             {/* <img src="/ACL.png" alt="gharJaggaLogo.svg" width={60} className="rounded-full"/> */}
-            <p className="font-bold text-inherit hidden lg:flex md:flex ml-2">AAYUSHA<span style={{color: "rgb(255,90,95)"}}>COLLECTION</span></p> 
+            <p className="hidden ml-2 font-bold text-inherit lg:flex md:flex">AAYUSHA<span style={{color: "rgb(255,90,95)"}}>COLLECTION</span></p> 
           </NavbarBrand>
         </Link>
      
-        <NavbarContent className="hidden sm:flex gap-4">
+        <NavbarContent className="hidden gap-4 sm:flex">
         <NavbarItem>
           <Link color="foreground" href="#" className="nav-item">
             About Us
@@ -222,7 +217,7 @@ export default function App() {
                 index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
               }
               className="w-full"
-              href="#"
+              href={process.env.NEXT_PUBLIC_API_URI+'/'+item.toLowerCase().replace(/\s+/g, '-')}
               size="lg"
             >
               {item}
